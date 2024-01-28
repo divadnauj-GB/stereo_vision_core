@@ -1,14 +1,20 @@
-import torch
-import torchvision
+# import torch
+# import torchvision
+import numpy as np 
+from PIL import Image
 
 
 
-Left_image=torchvision.io.read_image("./imL.png",torchvision.io.ImageReadMode.GRAY)
-right_image=torchvision.io.read_image("./imR.png",torchvision.io.ImageReadMode.GRAY)
+Left_image = np.array(Image.open("./imL.png").convert('YCbCr'))
+Right_image = np.array(Image.open("./imR.png").convert('YCbCr'))
+
+
+#Left_image=torchvision.io.read_image("./imL.png",torchvision.io.ImageReadMode.GRAY)
+#right_image=torchvision.io.read_image("./imR.png",torchvision.io.ImageReadMode.GRAY)
 
 im_shape=Left_image.shape
 
-(num_channels, N_filas, N_columnas)=im_shape
+(N_filas, N_columnas, num_channels)=im_shape
 print(im_shape)
 
 
@@ -24,8 +30,8 @@ for i in range(0,10*N_columnas):
     
 for i in range(0,N_filas):
     for j in range(0,N_columnas):
-        Vector_left.append(Left_image[(0,i,j)])
-        Vector_right.append(right_image[(0,i,j)])
+        Vector_left.append(Left_image[(i,j,0)])
+        Vector_right.append(Right_image[(i,j,0)])
         Vector_valid.append(1)
         
 for i in range(0,30*N_columnas): #(10*N_columnas+N_columnas*N_filas):(10*N_columnas+N_columnas*N_filas+10*N_columnas)
