@@ -7,7 +7,8 @@ This is the VHDL implementation of a stereo-matching Hardware Accelerator for St
 The details of the architecture implementation can be found [here](https://github.com/divadnauj-GB/stereo_matching_core/blob/main/docs/Stereo_Match_Core.pdf). 
 
 ## System Requierements
-- Python 3.8 or newer
+- Ubuntu >=20.04 
+- Python >=3.6
 - Modelsim or Questasim
 
 
