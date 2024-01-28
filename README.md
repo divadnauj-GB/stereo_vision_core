@@ -24,8 +24,7 @@ python3 run_stereo_simulation.py
 ```
 
 After running the example, you will obtain a new image called Disparity_map.png, showing the results of the disparity map. The lighter colors represent objects closer to the camera, and darker colors belong to objects located further in the scene. 
-
-![Drag Racing](Disparity_map.png)
+![Leftimg](imL.png) ![rightim](imR.png) ![Disparity_map](Disparity_map.png)
 
 
 
