@@ -38,7 +38,7 @@ def create_disparity_map(N_filas, N_columnas, num_channels):
                     i=N_filas-1
 
 
-    result=Output_image*255/48
+    result=Output_image*255/(Output_image.max())
     print(Output_image.max())
     #output_file=result.to(torch.uint8)
     output_file=result.astype(np.uint8)

@@ -41,15 +41,15 @@ type partial_hamming is array(0 to D-1) of std_logic_vector(log2(Wc**2/2) downto
 
 type Hamming is array(0 to D-1) of std_logic_vector((Wc**2)/2-1 downto 0);
 
-type Suma_window is array(0 to D-1) of std_logic_vector(log2((Wh**2)*(Wc**2)/2) downto 0);
+type Suma_window is array(0 to D-1) of std_logic_vector(log2(((Wc**2)/2)*(Wh**2)) downto 0);
 
 type disp  is array(0 to D-2,0 to 1) of std_logic_vector(log2(D) downto 0); 
 
-type Cost	is array(0 to D-2,0 to 1) of std_logic_vector(log2((Wh**2)*(Wc**2)/2) downto 0);
+type Cost	is array(0 to D-2,0 to 1) of std_logic_vector(log2(((Wc**2)/2)*(Wh**2)) downto 0);
 
 type sdisp  is array(0 to D-1) of std_logic_vector(log2(D) downto 0); 
 
-type sCost	is array(0 to D-1) of std_logic_vector(log2((Wh**2)*(Wc**2)/2) downto 0);
+type sCost	is array(0 to D-1) of std_logic_vector(log2(((Wc**2)/2)*(Wh**2)) downto 0);
 
 signal	s_valid_L		:std_logic_vector(D-1 downto 0); 
 signal	s_valid_H		:std_logic_vector(D-1 downto 0); 

@@ -10,11 +10,11 @@ generic(
 		Wc		:integer		:= 3
 		);
 port(
-	i_data_C1	:in		std_logic_vector(log2((Wh**2)*(Wc**2)/2) downto 0);
+	i_data_C1	:in		std_logic_vector(log2(((Wc**2)/2)*(Wh**2)) downto 0);
 	i_data_D1	:in		std_logic_vector(log2(D) downto 0);
-	i_data_C2	:in		std_logic_vector(log2((Wh**2)*(Wc**2)/2) downto 0);
+	i_data_C2	:in		std_logic_vector(log2(((Wc**2)/2)*(Wh**2)) downto 0);
 	i_data_D2	:in		std_logic_vector(log2(D) downto 0);
-	o_data_C		:out		std_logic_vector(log2((Wh**2)*(Wc**2)/2) downto 0);
+	o_data_C		:out		std_logic_vector(log2(((Wc**2)/2)*(Wh**2)) downto 0);
 	o_data_D		:out		std_logic_vector(log2(D) downto 0)
 	);
 end entity Disp_Cmp;
