@@ -44,7 +44,7 @@ UUT: entity work.Stereo_Match
 	generic map(
 				D		=> D,
 				Wc		=> 7,	-- Tamaño de la ventana de Census_Transform
-				Wh		=> 29,	--	Tamaño de la ventana de Hamming
+				Wh		=> 13,	--	Tamaño de la ventana de Hamming
 				M		=> 384,	-- Ancho de la imagen
 				N		=> 8		--	Numero de bits del dato de entrada
 				)

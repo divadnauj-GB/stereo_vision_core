@@ -8,8 +8,13 @@ from PIL import Image
 import Image_input_test
 import Image_result_test
 
-Left_image = np.array(Image.open("./im2.png").convert('L'))
-Right_image = np.array(Image.open("./im6.png").convert('L'))
+command = "rm -r ./work"
+print(command)
+os.system(command)
+
+
+Left_image = np.array(Image.open("./imL.png").convert('L'))
+Right_image = np.array(Image.open("./imR.png").convert('L'))
 
 im_shape=Left_image.shape
 
