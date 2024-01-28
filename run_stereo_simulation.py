@@ -8,7 +8,7 @@ from PIL import Image
 import Image_input_test
 import Image_result_test
 
-command = "rm -r ./work"
+command = "rm -R ./work"
 print(command)
 os.system(command)
 
