@@ -1,7 +1,7 @@
 # stereo_matching_core
 
 
-This is implementing a stereo-matching HW accelerator for Stereo vision applications. This accelerator uses Census Transform sparse (50%) and the sum of hamming distances to perform de stereo correspondence among left and right images. The accelerator implements the streaming processing computation approach. This HW implementation got inspiration from the work published by Wade S. Fife in [IEEE Xplore](https://ieeexplore.ieee.org/document/6213095)
+This is the VHDL implementation of a stereo-matching Hardware Accelerator for Stereo vision applications. This accelerator uses Census Transform with (50%) scarcity. Also, the accelerator employs the sum of hamming distances (SHD) to perform de stereo correspondence among left and right images. The accelerator implements the streaming processing computation approach. This HW implementation got inspiration from the work published by Wade S. Fife in [IEEE Xplore](https://ieeexplore.ieee.org/document/6213095)
 
 
 The details of the architecture implementation can be found [here](https://github.com/divadnauj-GB/stereo_matching_core/blob/main/docs/Stereo_Match_Core.pdf). 
