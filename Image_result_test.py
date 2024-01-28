@@ -20,7 +20,7 @@ with open("output_vector_data.txt",'r') as FIDR, open("output_vector_valid.txt",
     valid = FIDV.readlines()
 
 
-Output_image=np.zeros((N_filas, N_columnas, num_channels+2))
+Output_image=np.zeros((N_filas, N_columnas, num_channels))
 i=0
 j=0
 for k in range(0,len(valid)):
