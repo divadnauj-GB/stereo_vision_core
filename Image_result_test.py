@@ -4,7 +4,11 @@ import numpy as np
 from PIL import Image
 
 
-(num_channels, N_filas, N_columnas)=(1,288 , 384)
+Left_image = np.array(Image.open("./imL.png").convert('RGB'))
+
+im_shape=Left_image.shape
+
+(N_filas, N_columnas, num_channels)=im_shape
 
 
 Vector_left=[]
