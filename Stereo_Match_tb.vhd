@@ -6,6 +6,13 @@ USE std.textio.ALL;  -- libreria para simulacion con archivos
 
 --Entidad del Testbech
 entity Stereo_Match_tb is
+	generic(
+		D		:integer		:=	48;
+		Wc		:integer		:= 7;	-- Tamaño de la ventana de Census_Transform
+		Wh		:integer		:=	13;	--	Tamaño de la ventana de Hamming
+		M		:integer		:= 384;	-- Ancho de la imagen
+		N		:integer		:= 8		--	Numero de bits del dato de entrada
+		);
 end entity Stereo_Match_tb;
 
 
@@ -21,8 +28,6 @@ FILE vector_Valid_o		: TEXT OPEN WRITE_MODE is "output_vector_valid.txt";
 -- A partir de aqui puede hacer las modificaciones que necesite
 -- Declaracion de las señales que se emplearan para dar los estimulos
 --al diseño que requieren comprobar.
-
-constant D :integer := 48;
 
 signal si_clk			:std_logic :='0';					
 signal si_rst			:std_logic :='0';					
@@ -43,10 +48,10 @@ begin
 UUT: entity work.Stereo_Match
 	generic map(
 				D		=> D,
-				Wc		=> 7,	-- Tamaño de la ventana de Census_Transform
-				Wh		=> 13,	--	Tamaño de la ventana de Hamming
-				M		=> 384,	-- Ancho de la imagen
-				N		=> 8		--	Numero de bits del dato de entrada
+				Wc		=> Wc,	-- Tamaño de la ventana de Census_Transform
+				Wh		=> Wh,	--	Tamaño de la ventana de Hamming
+				M		=> M,	-- Ancho de la imagen
+				N		=> N		--	Numero de bits del dato de entrada
 				)
 	port map(
 			i_clk		    	=>  si_clk, 

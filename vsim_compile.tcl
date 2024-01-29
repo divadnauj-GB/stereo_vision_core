@@ -29,7 +29,8 @@ foreach src $gpgpu_vhdls {
 	}
 }
 
-vsim -64 -voptargs=+acc work.stereo_match_tb
+#vsim -64 -voptargs=+acc work.stereo_match_tb
+vsim -f vsim_config.txt
 #vsim -voptargs=+acc work.tb_top_level
 
 #vcd dumpports -file ../../Test_Programs/dumpports_SMP.evcd sim:/tb_top_level/uGPGPU/uStreamingMultiProcessor/*
