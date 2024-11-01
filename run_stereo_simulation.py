@@ -16,8 +16,8 @@ N=8
 
 # These are the input images to be evaluated
 
-Left_image = np.array(Image.open("./im2.png").convert('L'))
-Right_image = np.array(Image.open("./im6.png").convert('L'))
+Left_image = np.array(Image.open("./imL.png").convert('L'))
+Right_image = np.array(Image.open("./imR.png").convert('L'))
 
 im_shape=Left_image.shape
 

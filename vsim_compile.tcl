@@ -7,7 +7,7 @@ exec vlib work
 
 set gpgpu_vhdls [list \
 	"# SHD" \
-	"$Core_Generic_root/Stereo_Match_VHDL/SHD/funciones.vhd" \
+	"$Core_Generic_root/Stereo_Match_VHDL/SHD/funciones_pkg.vhd" \
 	"$Core_Generic_root/Stereo_Match_VHDL/SHD/Num_of_ones.vhd" \
 	"$Core_Generic_root/Stereo_Match_VHDL/SHD/Disp_Cmp.vhd" \
 	"$Core_Generic_root/Stereo_Match_VHDL/SHD/Window_sum.vhd" \
