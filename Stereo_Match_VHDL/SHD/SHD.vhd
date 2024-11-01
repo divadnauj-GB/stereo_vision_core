@@ -1,7 +1,7 @@
 library ieee;
 use	ieee.std_logic_1164.all;
 use 	ieee.numeric_std.all;
-use   work.funciones.all;
+use   work.funciones_pkg.all;
 
 entity SHD is
 generic(

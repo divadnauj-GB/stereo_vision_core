@@ -1,7 +1,7 @@
 library ieee;
 use	ieee.std_logic_1164.all;
 use 	ieee.numeric_std.all;
-use   work.funciones.all;
+use   work.funciones_pkg.all;
 
 entity LRCC is
 generic(
@@ -100,7 +100,7 @@ begin
 	elsif rising_edge(i_clk) then
 		if i_dval='1' then
 			s_tap3	<= s_tap2;
-			s_abs		<=	std_logic_vector(to_unsigned((abs(s_sub)),log2(D)+1));
+			s_abs		<=	std_logic_vector(unsigned(abs(to_signed(s_sub,log2(D)+1))));
 		end if;
 	end if;
 end process;
