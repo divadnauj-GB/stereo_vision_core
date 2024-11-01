@@ -1,8 +1,34 @@
-D=48
-Wc=7
-Wh=13
-M=384
-N=8
+
+
+if [[ -z "${D}" ]]; then
+  D=48
+else
+  D="${D}"
+fi
+
+if [[ -z "${Wc}" ]]; then
+  Wc=7
+else
+  Wc="${Wc}"
+fi
+
+if [[ -z "${Wh}" ]]; then
+  Wh=13
+else
+  Wh="${Wh}"
+fi
+
+if [[ -z "${M}" ]]; then
+  M=384
+else
+  M="${M}"
+fi
+
+if [[ -z "${N}" ]]; then
+  N=8
+else
+  N="${N}"
+fi
 
 
 #!/bin/bash

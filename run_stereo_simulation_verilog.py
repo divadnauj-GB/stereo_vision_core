@@ -16,8 +16,8 @@ N=8
 
 # These are the input images to be evaluated
 
-Left_image = np.array(Image.open("./imL.png").convert('L'))
-Right_image = np.array(Image.open("./imR.png").convert('L'))
+Left_image = np.array(Image.open("./im6L.png").convert('L'))
+Right_image = np.array(Image.open("./im6R.png").convert('L'))
 
 im_shape=Left_image.shape
 
@@ -39,7 +39,7 @@ os.system(command)
 
 Image_input_test.serialize_stereo_images(Left_image=Left_image,Right_image=Right_image)
 
-os.system(f"bash yosys_ghdl.sh D={D} M={N_columnas}")
+os.system(f"export D={D} M={N_columnas}; bash yosys_ghdl.sh ")
 
 # Here I create the configuration file that resize the accelerator according to the width of the input image
 with open("vsim_config.txt","w") as vsim_config:
