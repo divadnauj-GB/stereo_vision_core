@@ -4,13 +4,13 @@ library ieee;
 use ieee.std_logic_1164.all;
 use 	ieee.numeric_std.all;
 
-package funciones is
+package funciones_pkg is
 
 	function log2( i : integer) return integer;
 	
-end funciones;
+end funciones_pkg;
 
-package body funciones is
+package body funciones_pkg is
 
 function log2( i : integer) return integer is
     variable temp    : integer := i;
@@ -24,4 +24,4 @@ function log2( i : integer) return integer is
     return ret_val;
   end function;
 
-end funciones;
+end funciones_pkg;

@@ -38,6 +38,18 @@ signal si_Tresh_LRCC	:std_logic_vector(3 downto 0) :="0010";
 signal so_dval			:std_logic;				
 signal so_dato			:std_logic_vector(log2(D) downto 0);			
 
+component Stereo_Match is
+	port(
+	i_clk			:in		std_logic;
+	i_rst			:in		std_logic;
+	i_dato_L		:in		std_logic_vector(7 downto 0);
+	i_dato_R		:in		std_logic_vector(7 downto 0);
+	i_dval			:in		std_logic;
+	i_Tresh_LRCC	:in		std_logic_vector(3 downto 0);
+	o_dval			:out	std_logic;
+	o_dato			:out	std_logic_vector(log2(D) downto 0)
+	);
+end component Stereo_Match;
 
 begin
 
@@ -45,14 +57,7 @@ begin
 --Haga la instancia de su diseño aqui
 
 
-UUT: entity work.Stereo_Match
-	generic map(
-				D		=> D,
-				Wc		=> Wc,	-- Tamaño de la ventana de Census_Transform
-				Wh		=> Wh,	--	Tamaño de la ventana de Hamming
-				M		=> M,	-- Ancho de la imagen
-				N		=> N		--	Numero de bits del dato de entrada
-				)
+UUT: Stereo_Match
 	port map(
 			i_clk		    	=>  si_clk, 
 			i_rst		    	=>  si_rst, 
