@@ -1,8 +1,8 @@
 # Stereo Vision Core
 
-This repository corresponds to an independent implementation of an [Stereo Vision Core](https://ieeexplore.ieee.org/document/6213095) accelerator following the architecture previously published by Wade S. Fife. [Here](https://github.com/divadnauj-GB/stereo_matching_core/blob/main/docs/Stereo_Match_Core.pdf) you will find the hardware architecture followed by our implementation in this repository, which follows an [stream processing](https://books.google.it/books?hl=en&lr=&id=zBvQEAAAQBAJ&oi=fnd&pg=PR13&dq=info:VoM82DhlG14J:scholar.google.com&ots=Kd3v-oct1x&sig=0lTqyihl90F4YWILAg8FHmiNHlI&redir_esc=y#v=onepage&q&f=false) computation approach as described by Donald G. Bailey. The accelerator architecture uses Census Tranform (CT) + sum of hamming distance (SHD). In detail, the implemented accelerator uses Census Transform with (50%) sparcity.
+This repository corresponds to an independent implementation of an [Stereo Vision Core](https://ieeexplore.ieee.org/document/6213095) accelerator following the architecture previously published by Wade S. Fife. [Here](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/docs/Stereo_Match_Core.pdf) you will find the hardware architecture followed by our implementation in this repository, which follows an [stream processing](https://books.google.it/books?hl=en&lr=&id=zBvQEAAAQBAJ&oi=fnd&pg=PR13&dq=info:VoM82DhlG14J:scholar.google.com&ots=Kd3v-oct1x&sig=0lTqyihl90F4YWILAg8FHmiNHlI&redir_esc=y#v=onepage&q&f=false) computation approach as described by Donald G. Bailey. The accelerator architecture uses Census Tranform (CT) + sum of hamming distance (SHD). In detail, the implemented accelerator uses Census Transform with (50%) sparcity.
 
-It is worth noting that the original RTL description was developed on VHDL back in 2016 as part of my Master's thesis (You can check it [here](https://github.com/divadnauj-GB/stereo_matching_core/blob/main/docs/JuanDGuerrero-Msc-Thesis.pdf) the spanish version, there is no english version yet). Now, this repository also included additional scripts that convert the VHDL code into verilog by using yosys with the ghdl plugin. The design is fully parametrizable and sinthesizable. The accelerator has been implemented and evaluated on FPGAs, but such deployment is not part of this repository.
+It is worth noting that the original RTL description was developed on VHDL back in 2016 as part of my Master's thesis (You can check it [here](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/docs/JuanDGuerrero-Msc-Thesis.pdf) the spanish version, there is no english version yet). Now, this repository also included additional scripts that convert the VHDL code into verilog by using yosys with the ghdl plugin. The design is fully parametrizable and sinthesizable. The accelerator has been implemented and evaluated on FPGAs, but such deployment is not part of this repository.
 
 This repository provides an automated simulation setup using Modelsim. The following steps are required in order to simulate the accelerator.
 
@@ -19,21 +19,21 @@ This repository provides an automated simulation setup using Modelsim. The follo
 
 ```bash
 # Clone this repository
-git clone https://github.com/divadnauj-GB/stereo_matching_core.git
-cd stereo_matching_core
+git clone https://github.com/divadnauj-GB/stereo_vision_core.git
+cd stereo_vision_core
 ```
 
 ### 2. Run the simulation
 
-There are two ways of simulating the accelerator. The first one simulates the original RTL description from the VHDL design files. The second option, automatically converts the VHDL design into one RTL design file in verilog using yosys-ghdl pluging for yosys (we created this [script](https://github.com/divadnauj-GB/stereo_matching_core/blob/main/yosys_ghdl.sh) for that purpose); this new verilog file is then simulated using the same evaluation test-bench.
+There are two ways of simulating the accelerator. The first one simulates the original RTL description from the VHDL design files. The second option, automatically converts the VHDL design into one RTL design file in verilog using yosys-ghdl pluging for yosys (we created this [script](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/yosys_ghdl.sh) for that purpose); this new verilog file is then simulated using the same evaluation test-bench.
 
-For VHDL simulation you need to execute the script [run_stereo_simulation.py](https://github.com/divadnauj-GB/stereo_matching_core/blob/main/run_stereo_simulation_verilog.py)
+For VHDL simulation you need to execute the script [run_stereo_simulation.py](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/run_stereo_simulation_verilog.py)
 
 ```bash
 python3 run_stereo_simulation.py
 ```
 
-For verilog conversion and simulation you need  to execute the script [run_stereo_simulation_verilog.py](https://github.com/divadnauj-GB/stereo_matching_core/blob/main/run_stereo_simulation_verilog.py)
+For verilog conversion and simulation you need  to execute the script [run_stereo_simulation_verilog.py](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/run_stereo_simulation_verilog.py)
 
 ```bash
 python3 run_stereo_simulation_verilog.py
