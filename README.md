@@ -58,7 +58,7 @@ When the simulation ends, you will obtain a new image called Disparity_map.png, 
 
 ```bibtex
   @software{Guerrero-Balaguera_stereo_vision_core_2024,
-  author = {Guerrero-Balaguera, Juan-David},
+  author = {Guerrero-Balaguera, Juan-David and Perez-Holguin, Wilson Javier},
   doi = {10.5281/zenodo.14033322},
   month = nov,
   title = {{stereo\_vision\_core}},
