@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Guerrero-Balaguera"
+  given-names: "Juan-David"
+  orcid: "https://orcid.org/0000-0001-6852-2372"
+title: "stereo_vision_core"
+version: 1.0.0
+doi: 10.5281/zenodo.14033322
+date-released: 2024-11-04
+url: "https://github.com/divadnauj-GB/stereo_vision_core"
