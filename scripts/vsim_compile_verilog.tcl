@@ -8,7 +8,7 @@ exec vlib work
 vlog -64 -work work "$Core_Generic_root/Stereo_Match.v"
 
 vcom -64 -2008 -work work "$Core_Generic_root/Stereo_Match_VHDL/SHD/funciones_pkg.vhd"
-vcom -64 -2008 -work work "$Core_Generic_root/Stereo_Match_verilog_tb.vhd"
+vcom -64 -2008 -work work "$Core_Generic_root/TestBench/Stereo_Match_verilog_tb.vhd"
 #vsim -64 -voptargs=+acc work.stereo_match_tb
 vsim -f vsim_config.txt
 #vsim -voptargs=+acc work.tb_top_level

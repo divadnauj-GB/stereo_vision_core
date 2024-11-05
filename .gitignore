@@ -6,3 +6,7 @@ Stereo_Match.v
 transcript
 *.json
 *.log
+.Xil
+StereoProj
+__pycache
+scripts/__pycache

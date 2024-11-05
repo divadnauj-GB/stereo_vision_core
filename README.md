@@ -27,9 +27,9 @@ cd stereo_vision_core
 
 ### 2. Run the simulation
 
-There are two ways of simulating the accelerator. The first one simulates the original RTL description from the VHDL design files. The second option automatically converts the VHDL design into one RTL design file in Verilog using Yosys-ghdl plugging for Yosys (we created this [script](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/yosys_ghdl.sh) for that purpose); this new verilog file is then simulated using the same evaluation test-bench.
+There are two ways of simulating the accelerator. The first one simulates the original RTL description from the VHDL design files. The second option automatically converts the VHDL design into one RTL design file in Verilog using Yosys-ghdl plugging for Yosys (we created this [script](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/scripts/yosys_ghdl.sh) for that purpose); this new Verilog file is then simulated using the same evaluation test-bench.
 
-For VHDL simulation, you need to execute the script [run_stereo_simulation.py](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/run_stereo_simulation_verilog.py)
+For VHDL simulation, you need to execute the script [run_stereo_simulation.py](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/run_stereo_simulation.py)
 
 ```bash
 python3 run_stereo_simulation.py
@@ -43,27 +43,27 @@ python3 run_stereo_simulation_verilog.py
 
 ### 3. Results visualization
 
-After executing the simulation scripts, you need to wait some time to get the accelerator results. It is expected that the VHDL simulation takes around 3 minutes and the verilog simulation takes around 30 minutes, these are results obtained from a server with 256 cores and 128GB RAM. The verilog simulation takes significantly more time because during the conversion with yosys the original VHDL file is elaborated into basic units (i.e., regs, mux, adders, mults etc) significantly increasing the amount of objects required to simulate in comparison with the original VHDL description that contains several components in behavioural descriptions.
+After executing the simulation scripts, you need to wait some time to get the accelerator results. It is expected that the VHDL simulation takes around 3 minutes and the Verilog simulation takes around 30 minutes, these are results obtained from a server with 256 cores and 128GB RAM. The Verilog simulation takes significantly more time because during the conversion with yosys the original VHDL file is elaborated into basic units (i.e., regs, mux, adders, mults etc) significantly increasing the amount of objects required to simulate in comparison with the original VHDL description that contains several components in behavioural descriptions.
 
 When the simulation ends, you will obtain a new image called Disparity_map.png, which shows the accelerator results. This image is converted into a grayscale format so that the lighter colors represent objects closer to the cameras, and darker colors belong to objects located further in the scene or undefined objects.
 
 | | | | |
 |:-:|:-:|:-:|:-:|
 |Image| Left Image          |      Right Image     |     Output Result in grayscale    |
-|Tsukuba| ![Leftimg](imL.png) | ![rightim](imR.png)  |![Disparity_map](Disparity_map_tsukuba.png)|
-|Cones| ![Leftimg](im2L.png) | ![rightim](im2R.png)  |![Disparity_map](Disparity_map_Cones.png)|
-|Teddy| ![Leftimg](im6L.png) | ![rightim](im6R.png)  |![Disparity_map](Disparity_map_teddy.png)|
+|Tsukuba| ![Leftimg](dataset/imL.png) | ![rightim](dataset/imR.png)  |![Disparity_map](docs/img/Disparity_map_tsukuba.png)|
+|Cones| ![Leftimg](dataset/im2L.png) | ![rightim](dataset/im2R.png)  |![Disparity_map](docs/img/Disparity_map_Cones.png)|
+|Teddy| ![Leftimg](dataset/im6L.png) | ![rightim](dataset/im6R.png)  |![Disparity_map](docs/img/Disparity_map_teddy.png)|
 
 ## How to Cite?
 
 ```bibtex
-  @software{Guerrero-Balaguera_stereo_vision_core_2024,
-  author = {Guerrero-Balaguera, Juan-David and Perez-Holguin, Wilson Javier},
-  doi = {10.5281/zenodo.14033322},
-  month = nov,
-  title = {{stereo\_vision\_core}},
-  url = {https://github.com/divadnauj-GB/stereo_vision_core},
-  version = {1.0.0},
-  year = {2024}
+  @software{Guerrero-Balaguera_SVC_2024,
+    author = {Guerrero-Balaguera, Juan-David and Perez-Holguin, Wilson Javier},
+    doi = {10.5281/zenodo.14033322},
+    month = nov,
+    title = {{stereo vision core}},
+    url = {https://github.com/divadnauj-GB/stereo_vision_core},
+    version = {1.0.0},
+    year = {2024}
   }
 ```
