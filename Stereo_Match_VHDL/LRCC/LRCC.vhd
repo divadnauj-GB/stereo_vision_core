@@ -13,7 +13,7 @@ port(
 	i_data_L		:in		std_logic_vector(log2(D) downto 0);
 	i_data_R		:in		std_logic_vector(log2(D) downto 0);
 	i_dval		:in		std_logic;
-	i_Tresh		:in		std_logic_vector(3 downto 0);
+	i_Tresh		:in		std_logic_vector(log2(D) downto 0);
 	o_dval		:out		std_logic;
 	o_data_LRCC		:out		std_logic_vector(log2(D) downto 0)
 	);

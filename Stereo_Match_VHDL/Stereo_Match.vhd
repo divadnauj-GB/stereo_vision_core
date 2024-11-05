@@ -17,7 +17,7 @@ port(
 	i_dato_L		:in		std_logic_vector(7 downto 0);
 	i_dato_R		:in		std_logic_vector(7 downto 0);
 	i_dval			:in		std_logic;
-	i_Tresh_LRCC	:in		std_logic_vector(3 downto 0);
+	i_Tresh_LRCC	:in		std_logic_vector(log2(D) downto 0);
 	o_dval			:out	std_logic;
 	o_dato			:out	std_logic_vector(log2(D) downto 0)
 	);

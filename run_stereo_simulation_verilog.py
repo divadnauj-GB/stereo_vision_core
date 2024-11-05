@@ -2,23 +2,44 @@ import os
 import filecmp
 import subprocess
 
+
 import numpy as np 
 from PIL import Image
 
 import scripts.Image_input_test as Image_input_test
 import scripts.Image_result_test as Image_result_test
 
+import argparse
+parser = argparse.ArgumentParser(description='Stereo Vision Core Simulation')
+parser.add_argument('-D','--Disparity', default=64, type=int, help='disparity levels')
+parser.add_argument('-Wc','--Wcensus', default=7, type=int, help='Census window size')
+parser.add_argument('-Wh','--Whamming', default=13, type=int, help='Hamming window size')
+parser.add_argument('-N','--Nbits', default=8, type=int, help='Number of bits per pixel')
+parser.add_argument('-im','--image', default='Tsukuba', type=str, help='image: [Tsukuba, Cones, Teddy]')
+
+
 def main():
     # this are the configuration parameters of the accelerator passed trought the TB
-    D=48
-    Wc=7
-    Wh=13
-    N=8
+    args=parser.parse_args()
+    D=args.Disparity
+    Wc=args.Wcensus
+    Wh=args.Whamming
+    N=args.Nbits
 
+    image=args.image
+    # These are the input images to be evaluated
+    if image=="Tsukuba":
+        Thresh=16
+    if image=="Cones":
+        Thresh=64
+    if image=="Teddy":
+        Thresh=48
+    if image=="Venus":
+        Thresh=32
     # These are the input images to be evaluated
 
-    Left_image = np.array(Image.open("./dataset/im6L.png").convert('L'))
-    Right_image = np.array(Image.open("./dataset/im6R.png").convert('L'))
+    Left_image = np.array(Image.open(f"./dataset/{image}L.png").convert('L'))
+    Right_image = np.array(Image.open(f"./dataset/{image}R.png").convert('L'))
 
     im_shape=Left_image.shape
 
@@ -53,7 +74,7 @@ def main():
 
 
     # This function takes the output results of the simulation and create the disparity map result as image
-    Image_result_test.create_disparity_map(N_filas,N_columnas,3)
+    Image_result_test.create_disparity_map(N_filas,N_columnas,3,Thresh)
 
     # removing parameters from previous configurations:
     File_path=os.getcwd()
