@@ -27,7 +27,7 @@ cd stereo_vision_core
 
 ### 2. Run the simulation
 
-There are two ways of simulating the accelerator. The first one simulates the original RTL description from the VHDL design files. The second option automatically converts the VHDL design into one RTL design file in Verilog using Yosys-ghdl plugging for Yosys (we created this [script](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/scripts/yosys_ghdl.sh) for that purpose); this new verilog file is then simulated using the same evaluation test-bench.
+There are two ways of simulating the accelerator. The first one simulates the original RTL description from the VHDL design files. The second option automatically converts the VHDL design into one RTL design file in Verilog using Yosys-ghdl plugging for Yosys (we created this [script](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/scripts/yosys_ghdl.sh) for that purpose); this new Verilog file is then simulated using the same evaluation test-bench.
 
 For VHDL simulation, you need to execute the script [run_stereo_simulation.py](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/run_stereo_simulation.py)
 
@@ -43,7 +43,7 @@ python3 run_stereo_simulation_verilog.py
 
 ### 3. Results visualization
 
-After executing the simulation scripts, you need to wait some time to get the accelerator results. It is expected that the VHDL simulation takes around 3 minutes and the verilog simulation takes around 30 minutes, these are results obtained from a server with 256 cores and 128GB RAM. The verilog simulation takes significantly more time because during the conversion with yosys the original VHDL file is elaborated into basic units (i.e., regs, mux, adders, mults etc) significantly increasing the amount of objects required to simulate in comparison with the original VHDL description that contains several components in behavioural descriptions.
+After executing the simulation scripts, you need to wait some time to get the accelerator results. It is expected that the VHDL simulation takes around 3 minutes and the Verilog simulation takes around 30 minutes, these are results obtained from a server with 256 cores and 128GB RAM. The Verilog simulation takes significantly more time because during the conversion with yosys the original VHDL file is elaborated into basic units (i.e., regs, mux, adders, mults etc) significantly increasing the amount of objects required to simulate in comparison with the original VHDL description that contains several components in behavioural descriptions.
 
 When the simulation ends, you will obtain a new image called Disparity_map.png, which shows the accelerator results. This image is converted into a grayscale format so that the lighter colors represent objects closer to the cameras, and darker colors belong to objects located further in the scene or undefined objects.
 
