@@ -19,7 +19,7 @@ set gpgpu_vhdls [list \
 	"# Top" \
 	"$Core_Generic_root/Stereo_Match_VHDL/Stereo_Match.vhd" \
 	"# TB" \
-	"$Core_Generic_root/Stereo_Match_tb.vhd" \
+	"$Core_Generic_root/TestBench/Stereo_Match_tb.vhd" \
 ]
 
 foreach src $gpgpu_vhdls {

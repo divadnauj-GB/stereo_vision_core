@@ -60,5 +60,5 @@ def main():
     print(File_path)
     os.system("rm *.txt")
 
-if __name__=='__name__':
+if __name__=='__main__':
     main()
