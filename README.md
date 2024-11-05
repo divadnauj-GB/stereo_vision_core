@@ -61,7 +61,7 @@ When the simulation ends, you will obtain a new image called Disparity_map.png, 
     author = {Guerrero-Balaguera, Juan-David and Perez-Holguin, Wilson Javier},
     doi = {10.5281/zenodo.14033322},
     month = nov,
-    title = {{stereo vision core}},
+    title = {stereo vision core},
     url = {https://github.com/divadnauj-GB/stereo_vision_core},
     version = {1.0.0},
     year = {2024}
