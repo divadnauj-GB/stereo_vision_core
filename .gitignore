@@ -6,3 +6,5 @@ Stereo_Match.v
 transcript
 *.json
 *.log
+.Xil
+StereoProj

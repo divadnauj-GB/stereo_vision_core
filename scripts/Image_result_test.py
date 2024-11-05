@@ -17,7 +17,7 @@ def create_disparity_map(N_filas, N_columnas, num_channels):
     Vector_right=[]
     Vector_valid=[]
 
-    with open("output_vector_data.txt",'r') as FIDR, open("output_vector_valid.txt",'r') as FIDV:
+    with open("../output_vector_data.txt",'r') as FIDR, open("../output_vector_valid.txt",'r') as FIDV:
         Data = FIDR.readlines()
         valid = FIDV.readlines()
 
@@ -46,4 +46,4 @@ def create_disparity_map(N_filas, N_columnas, num_channels):
     #torchvision.io.write_png(output_file,"Disparity_map.png")
 
     im = Image.fromarray(output_file, mode="RGB")
-    im.save("Disparity_map.png")
+    im.save("../Disparity_map.png")

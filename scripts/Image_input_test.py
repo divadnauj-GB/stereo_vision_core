@@ -55,7 +55,7 @@ def serialize_stereo_images(Left_image,Right_image):
         Vector_valid.append(0)
 
 
-    with open("input_vector_left_image.txt",'w') as FIDL, open("input_vector_right_image.txt",'w') as FIDR, open("input_vector_valid.txt",'w') as FIDV:
+    with open("../input_vector_left_image.txt",'w') as FIDL, open("../input_vector_right_image.txt",'w') as FIDR, open("../input_vector_valid.txt",'w') as FIDV:
         for index in range(len(Vector_valid)):
             FIDL.write(f"{Vector_left[index]}\n")
             FIDR.write(f"{Vector_right[index]}\n")
