@@ -8,3 +8,5 @@ transcript
 *.log
 .Xil
 StereoProj
+__pycache
+scripts/__pycache
