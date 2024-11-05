@@ -4,6 +4,9 @@ authors:
 - family-names: "Guerrero-Balaguera"
   given-names: "Juan-David"
   orcid: "https://orcid.org/0000-0001-6852-2372"
+- family-names: "Perez-Holguin"
+  given-names: "Wilson Javier"
+  orcid: "https://orcid.org/0000-0001-5238-4470"
 title: "stereo_vision_core"
 version: 1.0.0
 doi: 10.5281/zenodo.14033322
