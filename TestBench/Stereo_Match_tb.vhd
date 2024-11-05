@@ -34,7 +34,7 @@ signal si_rst			:std_logic :='0';
 signal si_dato_L		:std_logic_vector(7 downto 0) :=(others=>'0');		
 signal si_dato_R		:std_logic_vector(7 downto 0) :=(others=>'0');	
 signal si_dval			:std_logic :='0';				
-signal si_Tresh_LRCC	:std_logic_vector(3 downto 0) :="0010";	
+signal si_Tresh_LRCC	:std_logic_vector(log2(D) downto 0) := std_logic_vector(to_unsigned(8,log2(D)+1));--"1111";	
 signal so_dval			:std_logic;				
 signal so_dato			:std_logic_vector(log2(D) downto 0);			
 

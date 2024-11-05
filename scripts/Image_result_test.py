@@ -11,7 +11,7 @@ from PIL import Image
 # 
 # (N_filas, N_columnas, num_channels)=im_shape
 
-def create_disparity_map(N_filas, N_columnas, num_channels):
+def create_disparity_map(N_filas, N_columnas, num_channels, Thresh=64):
 
     Vector_left=[]
     Vector_right=[]
@@ -21,7 +21,7 @@ def create_disparity_map(N_filas, N_columnas, num_channels):
         Data = FIDR.readlines()
         valid = FIDV.readlines()
 
-
+    tmp=[]
     Output_image=np.zeros((N_filas, N_columnas, num_channels))
     i=0
     j=0
@@ -38,6 +38,7 @@ def create_disparity_map(N_filas, N_columnas, num_channels):
                     i=N_filas-1
 
 
+    Output_image[Output_image>=Thresh]=0
     result=Output_image*255/(Output_image.max())
     print(Output_image.max())
     #output_file=result.to(torch.uint8)
