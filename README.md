@@ -29,7 +29,7 @@ cd stereo_vision_core
 
 There are two ways of simulating the accelerator. The first one simulates the original RTL description from the VHDL design files. The second option automatically converts the VHDL design into one RTL design file in Verilog using Yosys-ghdl plugging for Yosys (we created this [script](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/scripts/yosys_ghdl.sh) for that purpose); this new verilog file is then simulated using the same evaluation test-bench.
 
-For VHDL simulation, you need to execute the script [run_stereo_simulation.py](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/run_stereo_simulation_verilog.py)
+For VHDL simulation, you need to execute the script [run_stereo_simulation.py](https://github.com/divadnauj-GB/stereo_vision_core/blob/main/run_stereo_simulation.py)
 
 ```bash
 python3 run_stereo_simulation.py
