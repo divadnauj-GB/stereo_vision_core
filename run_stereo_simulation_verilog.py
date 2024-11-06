@@ -29,13 +29,14 @@ def main():
     image=args.image
     # These are the input images to be evaluated
     if image=="Tsukuba":
-        Thresh=16
+        Thresh=32 # Factor 8 for rendering the image 255/8=32
     if image=="Cones":
-        Thresh=64
+        Thresh=64 # Factor 4 for rendering the image 255/4=64
     if image=="Teddy":
-        Thresh=48
+        Thresh=64 # Factor 4 for rendering the image 255/4=64
     if image=="Venus":
-        Thresh=32
+        Thresh=32 # Factor 8 for rendering the image 255/8=32
+        
     # These are the input images to be evaluated
 
     Left_image = np.array(Image.open(f"./dataset/{image}L.png").convert('L'))

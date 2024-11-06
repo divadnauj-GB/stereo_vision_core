@@ -51,7 +51,7 @@ When the simulation ends, you will obtain a new image called Disparity_map.png, 
 |:-:|:-:|:-:|:-:|
 |Image| Left Image          |      Right Image     |     Output Result in grayscale    |
 |Tsukuba| ![Leftimg](dataset/TsukubaL.png) | ![rightim](dataset/TsukubaR.png)  |![Disparity_map](docs/img/Disparity_map_tsukuba.png)|
-|Cones| ![Leftimg](dataset/ConesL.png) | ![rightim](dataset/ConesR.png)  |![Disparity_map](docs/img/Disparity_map_Cones.png)|
+|Cones| ![Leftimg](dataset/ConesL.png) | ![rightim](dataset/ConesR.png)  |![Disparity_map](docs/img/Disparity_map_cones.png)|
 |Teddy| ![Leftimg](dataset/TeddyL.png) | ![rightim](dataset/TeddyR.png)  |![Disparity_map](docs/img/Disparity_map_teddy.png)|
 |Venus| ![Leftimg](dataset/VenusL.png) | ![rightim](dataset/VenusR.png)  |![Disparity_map](docs/img/Disparity_map_venus.png)|
 
