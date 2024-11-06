@@ -12,6 +12,7 @@ This repository provides an automated simulation setup using Modelsim. The follo
 
 - Ubuntu >=20.04
 - Python >=3.6
+- numpy >= 1.24
 - Modelsim or Questasim
 - OSS CAD Suite (Yosys and Ghdl)
 
