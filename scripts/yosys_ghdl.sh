@@ -61,6 +61,7 @@ done
 
 cmd+=" -e $TOP_MODULE"
 echo ${cmd} >> synth_generated.ys
+echo "proc" >> synth_generated.ys
 echo "write_verilog -renameprefix ghdl_gen $TOP_MODULE.v" >> synth_generated.ys
 #echo "hierarchy -check -top $TOP_MODULE"
 echo "exit">> synth_generated.ys
