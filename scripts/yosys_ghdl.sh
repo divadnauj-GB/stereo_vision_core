@@ -61,9 +61,10 @@ done
 
 cmd+=" -e $TOP_MODULE"
 echo ${cmd} >> synth_generated.ys
+echo "hierarchy -top $TOP_MODULE"
 echo "proc" >> synth_generated.ys
-echo "write_verilog -renameprefix ghdl_gen $TOP_MODULE.v" >> synth_generated.ys
-#echo "hierarchy -check -top $TOP_MODULE"
+echo "opt" >> synth_generated.ys
+echo "write_verilog -simple-lhs -renameprefix ghdl_gen $TOP_MODULE.v" >> synth_generated.ys
 echo "exit">> synth_generated.ys
 
 # Elaborate the top-level entity
