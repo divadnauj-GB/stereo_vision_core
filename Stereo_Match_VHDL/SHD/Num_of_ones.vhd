@@ -77,15 +77,15 @@ end process;
 --
 --o_dval	<=	s_valid(0);	
 --
---Col0:	for j in 0 to (K-1)/2 generate
---				sum(0,j)	<=	(to_integer(unsigned(s_input(2*j downto 2*j)))+to_integer(unsigned(s_input(2*j+1 downto 2*j+1))));
---		end generate Col0;
---
---Row0: for i in 1 to LOGK generate
---		Col1:	for j in 0 to (K-1)/((2**(i+1))) generate
---						sum(i,j)	<=	(to_integer(to_unsigned(sum1(i-1,2*j),i+1))+to_integer(to_unsigned(sum1(i-1,2*j+1),i+1)));
---				end generate Col1;
---		end generate Row0;
+Col0:	for j in 0 to (K-1)/2 generate
+				sum1(0,j)	<=	(to_integer(unsigned(s_input(2*j downto 2*j)))+to_integer(unsigned(s_input(2*j+1 downto 2*j+1))));
+		end generate Col0;
+
+Row0: for i in 1 to LOGK generate
+		Col1:	for j in 0 to (K-1)/((2**(i+1))) generate
+						sum1(i,j)	<=	(to_integer(to_unsigned(sum(i-1,2*j),i+1))+to_integer(to_unsigned(sum(i-1,2*j+1),i+1)));
+				end generate Col1;
+		end generate Row0;
 
 
 --===========================================================================================
@@ -100,16 +100,19 @@ begin
 	elsif rising_edge(i_clk) then
 		if (i_dval='1') then
 			s_input(Q-1 downto 0)	<=	i_data;
+			s_input(K-1 downto Q)	<=	(others => '0');
 	--		s_valid(LOGK+1)	<=	i_dval;
 	--		s_valid(LOGK downto 0)	<= s_valid(LOGK+1 downto 1);
-			for j in 0 to (K-1)/2 loop
-					sum(0,j)	<=	(to_integer(unsigned(s_input(2*j downto 2*j)))+to_integer(unsigned(s_input(2*j+1 downto 2*j+1))));
-			end loop;
-			for i in 1 to LOGK loop
-				for j in 0 to (K-1)/((2**(i+1))) loop
-							sum(i,j)	<=	(to_integer(to_unsigned(sum(i-1,2*j),i+1))+to_integer(to_unsigned(sum(i-1,2*j+1),i+1)));
-					end loop;
-			end loop;
+			--for jj in 0 to (K-1)/2 loop
+			--	sum(0,jj)	<=	(to_integer(unsigned(s_input(2*jj downto 2*jj)))+to_integer(unsigned(s_input(2*jj+1 downto 2*jj+1))));
+			--end loop;
+			--for i in 1 to LOGK loop
+			--	for j in 0 to (K-1)/((2**(i+1))) loop
+			--			sum(i,j)	<=	(to_integer(to_unsigned(sum(i-1,2*j),i+1))+to_integer(to_unsigned(sum(i-1,2*j+1),i+1)));
+			--		end loop;
+			--end loop;
+			sum <= sum1;
+
 		end if;
 	end if;
 end process;
