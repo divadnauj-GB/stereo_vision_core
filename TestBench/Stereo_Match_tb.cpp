@@ -7,6 +7,7 @@
 #include "VStereo_Match___024root.h"
 
 vluint64_t sim_time = 0;
+vluint64_t index_data = 0;
 
 int main(int argc, char** argv, char** env) {
     VStereo_Match *dut = new VStereo_Match;
@@ -43,22 +44,26 @@ int main(int argc, char** argv, char** env) {
     dut->i_Tresh_LRCC = 8;     
     for(int i=0; i<50; i++){
         dut->i_clk ^= 1;
-        dut->eval();        
+        dut->eval(); 
+        m_trace->dump(sim_time);
+        sim_time++;       
     }    
     dut->i_rst = 1;
     std::cout << "vector size "<<sizeof(image_valid);
-    while (sim_time < image_valid.size()) {
+    while (index_data < image_valid.size()) {
         dut->i_clk ^= 1;
         dut->eval();
         m_trace->dump(sim_time);        
         if (dut->i_clk==0){       
-            dut->i_dval = image_valid[sim_time];
-            dut->i_dato_L=image_left[sim_time];
-            dut->i_dato_R=image_right[sim_time];     
+            dut->i_dval = image_valid[index_data];
+            dut->i_dato_L=image_left[index_data];
+            dut->i_dato_R=image_right[index_data];     
             output_data.push_back(dut->o_dato);
             output_valid.push_back(dut->o_dval);
-            sim_time++;
-        }        
+            index_data++;
+        } 
+        sim_time++;
+
     }
     m_trace->close();
     delete dut;
