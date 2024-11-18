@@ -100,7 +100,7 @@ begin
 	elsif rising_edge(i_clk) then
 		if (i_dval='1') then
 			s_input(Q-1 downto 0)	<=	i_data;
-			s_input(K-1 downto Q)	<=	(others => '0');
+			--s_input(K-1 downto Q)	<=	(others => '0');
 	--		s_valid(LOGK+1)	<=	i_dval;
 	--		s_valid(LOGK downto 0)	<= s_valid(LOGK+1 downto 1);
 			--for jj in 0 to (K-1)/2 loop

@@ -57,8 +57,8 @@ int main(int argc, char** argv, char** env) {
             dut->i_dato_R=image_right[sim_time];     
             output_data.push_back(dut->o_dato);
             output_valid.push_back(dut->o_dval);
+            sim_time++;
         }        
-        sim_time++;
     }
     m_trace->close();
     delete dut;
