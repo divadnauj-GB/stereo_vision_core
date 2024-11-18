@@ -1,0 +1,4 @@
+cocotb == 1.9.2
+numpy == 2.1.3
+pillow == 11.0.0
+pytest == 8.3.3
