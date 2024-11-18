@@ -9,7 +9,7 @@ from PIL import Image
 # Right_image = np.array(Image.open("./imR.png").convert('L'))
 
 
-def serialize_stereo_images(Left_image,Right_image):
+def serialize_stereo_images(Left_image,Right_image,M):
 
     #Left_image=torchvision.io.read_image("./imL.png",torchvision.io.ImageReadMode.GRAY)
     #right_image=torchvision.io.read_image("./imR.png",torchvision.io.ImageReadMode.GRAY)
@@ -29,27 +29,31 @@ def serialize_stereo_images(Left_image,Right_image):
     Vector_valid=[]
 
 
-    for i in range(0,10*N_columnas):
+    for i in range(0,10*M):
         Vector_left.append(0)
         Vector_right.append(0)
         Vector_valid.append(0)
         
     for i in range(0,N_filas):
-        for j in range(0,N_columnas):
-            if num_channels!=0:
-                Vector_left.append(Left_image[(i,j,0)])
-                Vector_right.append(Right_image[(i,j,0)])
+        for j in range(0,M):
+            if j<N_columnas:
+                if num_channels!=0:
+                    Vector_left.append(Left_image[(i,j,0)])
+                    Vector_right.append(Right_image[(i,j,0)])
+                else:
+                    Vector_left.append(Left_image[(i,j)])
+                    Vector_right.append(Right_image[(i,j)])
             else:
-                Vector_left.append(Left_image[(i,j)])
-                Vector_right.append(Right_image[(i,j)])
+                Vector_left.append(0)
+                Vector_right.append(0)
             Vector_valid.append(1)
             
-    for i in range(0,30*N_columnas): #(10*N_columnas+N_columnas*N_filas):(10*N_columnas+N_columnas*N_filas+10*N_columnas)
+    for i in range(0,30*M): #(10*N_columnas+N_columnas*N_filas):(10*N_columnas+N_columnas*N_filas+10*N_columnas)
         Vector_left.append(0)
         Vector_right.append(0)
         Vector_valid.append(1)
 
-    for i in range(0,20*N_columnas): #(10*N_columnas+N_columnas*N_filas):(10*N_columnas+N_columnas*N_filas+10*N_columnas)
+    for i in range(0,20*M): #(10*N_columnas+N_columnas*N_filas):(10*N_columnas+N_columnas*N_filas+10*N_columnas)
         Vector_left.append(0)
         Vector_right.append(0)
         Vector_valid.append(0)

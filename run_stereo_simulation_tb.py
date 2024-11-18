@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(description='Stereo Vision Core Simulation')
 parser.add_argument('-D','--Disparity', default=64, type=int, help='disparity levels')
 parser.add_argument('-Wc','--Wcensus', default=7, type=int, help='Census window size')
 parser.add_argument('-Wh','--Whamming', default=13, type=int, help='Hamming window size')
+parser.add_argument('-M','--MaxImWidth', default=450, type=int, help='maximum image width')
 parser.add_argument('-N','--Nbits', default=8, type=int, help='Number of bits per pixel')
 parser.add_argument('-im','--image', default='Tsukuba', type=str, help='image: [Tsukuba, Cones, Teddy]')
 parser.add_argument('-gv','--generate-verilog', default=False, type=lambda x: bool(int(x)), help='enable the elaboration from VHDL to verilog')
@@ -28,6 +29,7 @@ def main():
     Wc=args.Wcensus
     Wh=args.Whamming
     N=args.Nbits
+    M=args.MaxImWidth
 
     image=args.image
     # These are the input images to be evaluated
@@ -62,12 +64,12 @@ def main():
 
     # This function serializes the images to make them compatible with the accelerator processing architecture
 
-    Image_input_test.serialize_stereo_images(Left_image=Left_image,Right_image=Right_image)
+    Image_input_test.serialize_stereo_images(Left_image=Left_image,Right_image=Right_image,M=M)
     print(args.generate_verilog)
     if (args.generate_verilog==True) and (args.simulation_tool=='cocotb+verilator' or args.simulation_tool=='verilator' or args.simulation_tool=='qsim+verilog'):
         os.system(f"rm -rf sim_build")
         os.system(f"rm -rf obj_dir")
-        os.system(f"export D={D} M={N_columnas}; bash scripts/yosys_ghdl.sh ")        
+        os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")        
 
     #os.chdir(os.path.join(os.getcwd(),"TestBench"))
     # this command launch the simulation in modelsim
@@ -88,7 +90,7 @@ def main():
     elif args.simulation_tool=='qsim+verilog':
         # Here I create the configuration file that resize the accelerator according to the width of the input image
         with open("vsim_config.txt","w") as vsim_config:
-            vsim_config.write(f"-64 -voptargs=+acc -gD={D} -gM={N_columnas} work.stereo_match_tb")
+            vsim_config.write(f"-64 -voptargs=+acc -gD={D} -gM={M} work.stereo_match_tb")
         # this command launch the simulation in modelsim
         command = "vsim -c -do scripts/vsim_compile_verilog.tcl"
         print(command)
@@ -96,21 +98,21 @@ def main():
     elif args.simulation_tool=='qsim+VHDL':
         # Here I create the configuration file that resize the accelerator according to the width of the input image
         with open("vsim_config.txt","w") as vsim_config:
-            vsim_config.write(f"-64 -voptargs=+acc -gD={D} -gM={N_columnas} work.stereo_match_tb")
+            vsim_config.write(f"-64 -voptargs=+acc -gD={D} -gM={M} work.stereo_match_tb")
 
         # this command launch the simulation in modelsim
         command = "vsim -c -do ./scripts/vsim_compile.tcl"
         print(command)
         os.system(command)
     else:
-        os.system(f"export D={D} M={N_columnas}; bash scripts/yosys_ghdl.sh ")
+        os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")
         command = "verilator -max-num-width 80000 --trace --trace-depth 1 --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match; ./obj_dir/VStereo_Match"
         print(command)
         os.system(command)
     #os.chdir("..")
 
     # This function takes the output results of the simulation and create the disparity map result as image
-    Image_result_test.create_disparity_map(N_filas,N_columnas,3,Thresh)
+    Image_result_test.create_disparity_map(N_filas,M,3,Thresh)
 
     # removing parameters from previous configurations:
     File_path=os.getcwd()
