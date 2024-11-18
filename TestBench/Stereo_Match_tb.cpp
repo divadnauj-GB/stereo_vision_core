@@ -18,12 +18,12 @@ int main(int argc, char** argv, char** env) {
     std::vector<int> output_data;
     std::vector<int> output_valid;
 
-    std::ifstream file_image_left; 
-    file_image_left.open("../input_vector_left_image.txt");
-    std::ifstream file_image_right; 
-    file_image_right.open("../input_vector_right_image.txt");
-    std::ifstream file_image_valid; 
-    file_image_valid.open("../input_vector_valid.txt");
+    std::ifstream file_image_left("../input_vector_left_image.txt"); 
+    std::ifstream file_image_right("../input_vector_right_image.txt"); 
+    std::ifstream file_image_valid("../input_vector_valid.txt"); 
+    std::ofstream outputDato("../output_vector_data.txt"); // create a new output file or overwrite an existing one
+    std::ofstream outputValid("../output_vector_valid.txt");
+
 
     std::string line;
     if(file_image_left)
@@ -49,49 +49,35 @@ int main(int argc, char** argv, char** env) {
         sim_time++;       
     }    
     dut->i_rst = 1;
-    std::cout << "vector size "<<sizeof(image_valid);
-    while (index_data < image_valid.size()) {
-        dut->i_clk ^= 1;
-        dut->eval();
-        m_trace->dump(sim_time);        
-        if (dut->i_clk==0){       
-            dut->i_dval = image_valid[index_data];
-            dut->i_dato_L=image_left[index_data];
-            dut->i_dato_R=image_right[index_data];     
-            output_data.push_back(dut->o_dato);
-            output_valid.push_back(dut->o_dval);
-            index_data++;
-        } 
-        sim_time++;
-
-    }
-    m_trace->close();
-    delete dut;
-
-    std::ofstream outputDato; // create a new output file or overwrite an existing one
-    outputDato.open("../output_vector_data.txt");
-    std::ofstream outputValid("../output_vector_valid.txt");
-
     
-    if (outputDato.is_open()) { // check if the file was opened successfully
-        for(auto val:output_data){
-            outputDato << val << "\n"; // write data to the file
-         }
-    outputDato.close(); // close the file when done
+    if (outputDato.is_open() && outputValid.is_open()) {
+
+        while (index_data < image_valid.size()) {
+            dut->i_clk ^= 1;
+            dut->eval();
+            m_trace->dump(sim_time);        
+            if (dut->i_clk==0){       
+                dut->i_dval = image_valid[index_data];
+                dut->i_dato_L=image_left[index_data];
+                dut->i_dato_R=image_right[index_data];     
+                outputDato << int(dut->o_dato)  << "\n";
+                outputValid << int(dut->o_dval) << "\n"; 
+                //output_data.push_back(dut->o_dato);
+                //output_valid.push_back(dut->o_dval);
+                index_data++;
+            } 
+            sim_time++;
+
+        }
+        outputDato.close(); // close the file when done
+        outputValid.close();
+        m_trace->close();
+        delete dut;
     }
     else {
         std::cerr << "Error opening file\n";
     }
    
-   if (outputValid.is_open()) { // check if the file was opened successfully
-        for(auto val:output_valid){
-            outputValid << val << "\n"; // write data to the file
-         }
-    outputValid.close(); // close the file when done
-    }
-    else {
-        std::cerr << "Error opening file\n";
-    }
     
     exit(EXIT_SUCCESS);
 }
