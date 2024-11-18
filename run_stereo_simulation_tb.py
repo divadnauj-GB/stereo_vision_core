@@ -18,6 +18,7 @@ parser.add_argument('-N','--Nbits', default=8, type=int, help='Number of bits pe
 parser.add_argument('-im','--image', default='Tsukuba', type=str, help='image: [Tsukuba, Cones, Teddy]')
 parser.add_argument('-gv','--generate-verilog', default=False, type=lambda x: bool(int(x)), help='enable the elaboration from VHDL to verilog')
 parser.add_argument('-simt','--simulation-tool', default='verilator', type=str, help='simulation tool: [verilator, cocotb+verilator, qsim+VHDL, qsim+verilog]')
+parser.add_argument('-nt','--num-threads', default=4, type=int, help='num of threads for verilator simulation; default 4')
 
 
 def main():
@@ -64,6 +65,8 @@ def main():
     Image_input_test.serialize_stereo_images(Left_image=Left_image,Right_image=Right_image)
     print(args.generate_verilog)
     if (args.generate_verilog==True) and (args.simulation_tool=='cocotb+verilator' or args.simulation_tool=='verilator' or args.simulation_tool=='qsim+verilog'):
+        os.system(f"rm -rf sim_build")
+        os.system(f"rm -rf obj_dir")
         os.system(f"export D={D} M={N_columnas}; bash scripts/yosys_ghdl.sh ")        
 
     #os.chdir(os.path.join(os.getcwd(),"TestBench"))
@@ -71,7 +74,7 @@ def main():
 
     if args.simulation_tool=='verilator':
         os.chdir(os.path.join(os.getcwd(),"TestBench"))
-        command = "verilator -max-num-width 80000 --trace --trace-depth 1 --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match; ./obj_dir/VStereo_Match"
+        command = f"verilator -max-num-width 80000 --trace --trace-depth 1 --threads {args.num_threads} --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match; ./obj_dir/VStereo_Match"
         print(command)
         os.system(command)
         os.chdir("..")
@@ -112,7 +115,7 @@ def main():
     # removing parameters from previous configurations:
     File_path=os.getcwd()
     print(File_path)
-    #os.system("rm *.txt")
+    os.system("rm *.txt")
 
 
 if __name__=='__main__':

@@ -60,7 +60,7 @@ conda create -n stereo_tb python=3.11
 # activate the environmet
 conda activate stereo_tb
 # install the required packages
-python -m pip install -r requirements.txt
+python -m pip install --upgrade -r requirements.txt
 
 ```
 
