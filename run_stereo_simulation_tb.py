@@ -69,7 +69,7 @@ def main():
     if (args.generate_verilog==True) and (args.simulation_tool=='cocotb+verilator' or args.simulation_tool=='verilator' or args.simulation_tool=='qsim+verilog'):
         os.system(f"rm -rf sim_build")
         os.system(f"rm -rf obj_dir")
-        #os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")                
+        os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")                
     #os.chdir(os.path.join(os.getcwd(),"TestBench"))
     # this command launch the simulation in modelsim
 
