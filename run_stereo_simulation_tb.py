@@ -69,14 +69,15 @@ def main():
     if (args.generate_verilog==True) and (args.simulation_tool=='cocotb+verilator' or args.simulation_tool=='verilator' or args.simulation_tool=='qsim+verilog'):
         os.system(f"rm -rf sim_build")
         os.system(f"rm -rf obj_dir")
-        os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")        
-
+        #os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")                
     #os.chdir(os.path.join(os.getcwd(),"TestBench"))
     # this command launch the simulation in modelsim
 
     if args.simulation_tool=='verilator':
         os.chdir(os.path.join(os.getcwd(),"TestBench"))
-        command = f"verilator -max-num-width 80000 --trace --trace-depth 1 --threads {args.num_threads} --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match; ./obj_dir/VStereo_Match"
+        if args.generate_verilog:
+            os.system(f"verilator -max-num-width 80000 --trace --trace-depth 1 -Wno-UNOPTFLAT --threads {args.num_threads} -j 8 --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match")
+        command = f"./obj_dir/VStereo_Match"
         print(command)
         os.system(command)
         os.chdir("..")
@@ -106,9 +107,12 @@ def main():
         os.system(command)
     else:
         os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")
-        command = "verilator -max-num-width 80000 --trace --trace-depth 1 --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match; ./obj_dir/VStereo_Match"
+        os.chdir(os.path.join(os.getcwd(),"TestBench"))
+        os.system(f"verilator -max-num-width 80000 --trace --trace-depth 1 -Wno-UNOPTFLAT --threads {args.num_threads} --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match")
+        command = f"./obj_dir/VStereo_Match"
         print(command)
         os.system(command)
+        os.chdir("..")
     #os.chdir("..")
 
     # This function takes the output results of the simulation and create the disparity map result as image
