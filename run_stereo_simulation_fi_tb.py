@@ -17,9 +17,10 @@ parser.add_argument('-Wh','--Whamming', default=13, type=int, help='Hamming wind
 parser.add_argument('-M','--MaxImWidth', default=450, type=int, help='maximum image width')
 parser.add_argument('-N','--Nbits', default=8, type=int, help='Number of bits per pixel')
 parser.add_argument('-im','--image', default='Tsukuba', type=str, help='image: [Tsukuba, Cones, Teddy]')
-parser.add_argument('-gv','--generate-verilog', default=False, type=lambda x: bool(int(x)), help='enable the elaboration from VHDL to verilog')
-parser.add_argument('-simt','--simulation-tool', default='verilator', type=str, help='simulation tool: [verilator, cocotb+verilator, qsim+VHDL, qsim+verilog]')
-parser.add_argument('-nt','--num-threads', default=4, type=int, help='num of threads for verilator simulation; default 4')
+parser.add_argument('-ft','--f-type', default=0, type=int, help='image: [Tsukuba, Cones, Teddy]')
+parser.add_argument('-cm','--component', default=0, type=int, help='image: [Tsukuba, Cones, Teddy]')
+parser.add_argument('-bp','--bit-pos', default=0, type=int, help='image: [Tsukuba, Cones, Teddy]')
+
 
 
 fi_structure={
@@ -84,8 +85,7 @@ def main():
         (N_filas, N_columnas, num_channels)=im_shape
         
     print(im_shape)
-
-    fault_list()
+   
     command = "rm -R ./work"
     print(command)
     os.system(command)
@@ -96,25 +96,26 @@ def main():
 
     Image_input_test.serialize_stereo_images(Left_image=Left_image,Right_image=Right_image,M=M)
 
-    if args.simulation_tool=='verilator':
-        os.chdir(os.path.join(os.getcwd(),"fi_work"))        
-        command = f"./obj_dir/VStereo_Match"
-        print(command)
-        os.system(command)
-        os.chdir("..")
-    
-    else:
-        
-        os.chdir(os.path.join(os.getcwd(),"fi_work"))
-        command = f"./obj_dir/VStereo_Match"
-        print(command)
-        os.system(command)
-        os.chdir("..")
+    f_type=args.f_type
+    component=args.component
+    bit_pos=args.bit_pos
+
+    fi_structure['component']=component
+    fi_structure['f_model']=f_type
+    fi_structure['bit_pos']=bit_pos
+    fault_list()
+
+    os.chdir(os.path.join(os.getcwd(),"fi_work"))        
+    command = f"./obj_dir/VStereo_Match"
+    print(command)
+    os.system(command)
+    os.chdir("..")
     #os.chdir("..")
 
     # This function takes the output results of the simulation and create the disparity map result as image
-    Image_result_test.create_disparity_map(N_filas,M,3,Thresh)
-
+    im=Image_result_test.create_disparity_map(N_filas,M,3,Thresh)
+    im.save(f"{image}_f_{f_type}_{component}_{bit_pos}.png")
+                #os.system(f"cp *.png fi_work/{image}_f_{f_type}_{component}_{bit_pos}.png")
     # removing parameters from previous configurations:
     File_path=os.getcwd()
     print(File_path)

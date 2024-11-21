@@ -116,8 +116,8 @@ def main():
     #os.chdir("..")
 
     # This function takes the output results of the simulation and create the disparity map result as image
-    Image_result_test.create_disparity_map(N_filas,M,3,Thresh)
-
+    im=Image_result_test.create_disparity_map(N_filas,M,3,Thresh)
+    im.save(f"Disparity_map.png")
     # removing parameters from previous configurations:
     File_path=os.getcwd()
     print(File_path)

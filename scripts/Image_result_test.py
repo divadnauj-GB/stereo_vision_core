@@ -47,4 +47,5 @@ def create_disparity_map(N_filas, N_columnas, num_channels, Thresh=64):
     #torchvision.io.write_png(output_file,"Disparity_map.png")
 
     im = Image.fromarray(output_file, mode="RGB")
-    im.save("Disparity_map.png")
+    #im.save("Disparity_map.png")
+    return(im)
