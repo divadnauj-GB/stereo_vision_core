@@ -15,7 +15,7 @@ echo "read_verilog $TOP_MODULE.v" >> synth_generated.ys
 echo "hierarchy -check -top ${MODULE}" >> synth_generated.ys
 echo "proc; opt; memory; opt; fsm; opt" >> synth_generated.ys
 echo "techmap; opt" >> synth_generated.ys
-echo "splitnets -driver" >> synth_generated.ys
+#echo "splitnets -driver" >> synth_generated.ys
 echo "opt_clean -purge" >> synth_generated.ys
 echo "check" >> synth_generated.ys
 echo "clean" >> synth_generated.ys
