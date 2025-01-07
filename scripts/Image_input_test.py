@@ -47,6 +47,9 @@ def serialize_stereo_images(Left_image,Right_image,M):
                 Vector_left.append(0)
                 Vector_right.append(0)
             Vector_valid.append(1)
+        Vector_left.append(0)
+        Vector_right.append(0)
+        Vector_valid.append(0)
             
     for i in range(0,30*M): #(10*N_columnas+N_columnas*N_filas):(10*N_columnas+N_columnas*N_filas+10*N_columnas)
         Vector_left.append(0)
