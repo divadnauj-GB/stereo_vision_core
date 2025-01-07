@@ -37,7 +37,7 @@ PWD="$(pwd)"
 rm -r build
 mkdir -p build
 # Additional sources (i.e. the top unit)
-SRC_FOLDER=${PWD}/Stereo_Match_VHDL
+SRC_FOLDER=${PWD}/stereo_match_verilog
 # Define the top-level entity name
 TOP_MODULE="stereo_match"  # Replace with your actual top-level entity name
 
@@ -48,23 +48,22 @@ cat > synth_generated.ys << EOF
 # Read all VHDL files with GHDL
 EOF
 
-cmd="ghdl --std=08 --work=work --workdir=build -gD=${D} -gWc=${Wc} -gWh=${Wh} -gM=${M} -gN=${N} -Pbuild"
+cmd="read_verilog -defer "
 
-for pkg_file in $(find ${SRC_FOLDER} -type f -name "*_pkg.vhd" | sort); do
-    cmd+=" $pkg_file"
+for verilog_file in $(find ${SRC_FOLDER} -type f -name "*.v" | sort); do
+    cmd+=" $verilog_file"
 done
 
-# Add all .vhdl files to the script dynamically
-for vhdl_file in $(find ${SRC_FOLDER} -type f -name "*.vhd" ! -name "*_pkg.vhd" | sort); do
-    cmd+=" $vhdl_file"
-done
-
-cmd+=" -e $TOP_MODULE"
 echo ${cmd} >> synth_generated.ys
-echo "hierarchy -check -top $TOP_MODULE"
+echo "chparam -set D $D" $TOP_MODULE>> synth_generated.ys
+echo "chparam -set WC $Wc $TOP_MODULE" >> synth_generated.ys
+echo "chparam -set WH $Wh $TOP_MODULE" >> synth_generated.ys
+echo "chparam -set M $M $TOP_MODULE" >> synth_generated.ys
+echo "chparam -set N $N $TOP_MODULE" >> synth_generated.ys
+echo "hierarchy -check -top $TOP_MODULE" >> synth_generated.ys
 echo "proc; opt; memory; opt; fsm; opt" >> synth_generated.ys
 echo "opt_clean -purge" >> synth_generated.ys
-echo "write_verilog -noattr -simple-lhs -renameprefix ghdl_gen $TOP_MODULE.v" >> synth_generated.ys
+echo "write_verilog -noattr -simple-lhs -renameprefix rtil_signal $TOP_MODULE.v" >> synth_generated.ys
 echo "exit">> synth_generated.ys
 
 # Elaborate the top-level entity
@@ -81,7 +80,7 @@ cat >> synth_generated.ys << EOF
 EOF
 
 # Run the generated Yosys script
-yosys -m ghdl -s synth_generated.ys
+yosys -s synth_generated.ys
 
 # Clean up the generated script if you don't need it afterwards
 rm synth_generated.ys

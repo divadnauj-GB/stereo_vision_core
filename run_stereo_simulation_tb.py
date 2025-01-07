@@ -20,6 +20,7 @@ parser.add_argument('-im','--image', default='Tsukuba', type=str, help='image: [
 parser.add_argument('-gv','--generate-verilog', default=False, type=lambda x: bool(int(x)), help='enable the elaboration from VHDL to verilog')
 parser.add_argument('-simt','--simulation-tool', default='verilator', type=str, help='simulation tool: [verilator, cocotb+verilator, qsim+VHDL, qsim+verilog]')
 parser.add_argument('-nt','--num-threads', default=4, type=int, help='num of threads for verilator simulation; default 4')
+parser.add_argument('-src','--source', default='v', type=str, help='source code: [v, vhdl]')
 
 
 def main():
@@ -69,15 +70,19 @@ def main():
     if (args.generate_verilog==True) and (args.simulation_tool=='cocotb+verilator' or args.simulation_tool=='verilator' or args.simulation_tool=='qsim+verilog'):
         os.system(f"rm -rf sim_build")
         os.system(f"rm -rf obj_dir")
-        os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")                
+        if args.source=='vhdl':
+            os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_ghdl.sh ")  
+        else:
+            os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_verilog.sh ")
+            pass
     #os.chdir(os.path.join(os.getcwd(),"TestBench"))
     # this command launch the simulation in modelsim
 
     if args.simulation_tool=='verilator':
         os.chdir(os.path.join(os.getcwd(),"TestBench"))
         if args.generate_verilog:
-            os.system(f"verilator -max-num-width 80000 --trace --trace-depth 1 -Wno-UNOPTFLAT --threads {args.num_threads} -j 8 --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match")
-        command = f"./obj_dir/VStereo_Match"
+            os.system(f"verilator -O3 -max-num-width 80000 --trace --trace-depth 1 --threads {args.num_threads} -j 8 --cc ../stereo_match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f Vstereo_match.mk Vstereo_match")
+        command = f"./obj_dir/Vstereo_match"
         print(command)
         os.system(command)
         os.chdir("..")
@@ -106,10 +111,13 @@ def main():
         print(command)
         os.system(command)
     else:
-        os.system(f"export D={D} M={M}; bash scripts/yosys_ghdl.sh ")
+        if args.source=='vhdl':
+            os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_ghdl.sh ")  
+        else:
+            os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_verilog.sh ")
         os.chdir(os.path.join(os.getcwd(),"TestBench"))
-        os.system(f"verilator -max-num-width 80000 --trace --trace-depth 1 -Wno-UNOPTFLAT --threads {args.num_threads} --cc ../Stereo_Match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f VStereo_Match.mk VStereo_Match")
-        command = f"./obj_dir/VStereo_Match"
+        os.system(f"verilator -max-num-width 80000 --trace --trace-depth 1 -Wno-UNOPTFLAT --threads {args.num_threads} --cc ../stereo_match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f Vstereo_match.mk Vstereo_match")
+        command = f"./obj_dir/Vstereo_match"
         print(command)
         os.system(command)
         os.chdir("..")

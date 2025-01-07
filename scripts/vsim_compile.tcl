@@ -17,7 +17,7 @@ set gpgpu_vhdls [list \
 	"# LRCC" \
 	"$Core_Generic_root/Stereo_Match_VHDL/LRCC/LRCC.vhd" \
 	"# Top" \
-	"$Core_Generic_root/Stereo_Match_VHDL/Stereo_Match.vhd" \
+	"$Core_Generic_root/Stereo_Match_VHDL/stereo_match.vhd" \
 	"# TB" \
 	"$Core_Generic_root/TestBench/Stereo_Match_tb.vhd" \
 ]

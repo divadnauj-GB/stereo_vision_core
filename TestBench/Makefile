@@ -7,13 +7,13 @@
 SIM ?= verilator
 TOPLEVEL_LANG ?= verilog
 
-EXTRA_ARGS += -max-num-width 80000 --trace --trace-depth 1 -Wno-UNOPTFLAT
+EXTRA_ARGS += -max-num-width 80000 --trace --trace-depth 1 
 
-VERILOG_SOURCES += $(PWD)/../Stereo_Match.v
+VERILOG_SOURCES += $(PWD)/../stereo_match.v
 # use VHDL_SOURCES for VHDL files
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file
-TOPLEVEL = Stereo_Match
+TOPLEVEL = stereo_match
 
 # MODULE is the basename of the Python test file
 MODULE = Stereo_Match_tb

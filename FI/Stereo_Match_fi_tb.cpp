@@ -3,17 +3,17 @@
 #include <fstream>
 #include <verilated.h>
 #include <verilated_vcd_c.h>
-#include "VStereo_Match.h"
-#include "VStereo_Match___024root.h"
+#include "Vstereo_match.h"
+#include "Vstereo_match___024root.h"
 
-#define TRACE_EN
+//#define TRACE_EN
 
 vluint64_t sim_time = 0;
 vluint64_t index_data = 0;
 vluint64_t fault_idx = 3;
 
 int main(int argc, char** argv, char** env) {
-    VStereo_Match *dut = new VStereo_Match;
+    Vstereo_match *dut = new Vstereo_match;
     std::vector<int> image_left;
     std::vector<int> image_right;
     std::vector<int> image_valid;
@@ -50,7 +50,7 @@ int main(int argc, char** argv, char** env) {
         dut->trace(m_trace, 1);
         m_trace->open("waveform.vcd");
     #endif
-    dut->i_Tresh_LRCC = 8; 
+    dut->i_tresh_lrcc = 8; 
     dut->injector_i_RST=0;    
     dut->injector_i_TFEn=0;
     dut->injector_i_EN=0;
@@ -65,7 +65,7 @@ int main(int argc, char** argv, char** env) {
         #endif
         sim_time++;       
     }    
-    dut->i_rst = 1;
+    dut->i_rstn = 1;
     dut->injector_i_RST=1;
 
     int modules=fault_descriptor[0];
@@ -133,9 +133,9 @@ int main(int argc, char** argv, char** env) {
             #endif
             if (dut->i_clk==0){       
                 dut->i_dval = image_valid[index_data];
-                dut->i_dato_L=image_left[index_data];
-                dut->i_dato_R=image_right[index_data];     
-                outputDato << int(dut->o_dato)  << "\n";
+                dut->i_data_l=image_left[index_data];
+                dut->i_data_r=image_right[index_data];     
+                outputDato << int(dut->o_data)  << "\n";
                 outputValid << int(dut->o_dval) << "\n"; 
                 //output_data.push_back(dut->o_dato);
                 //output_valid.push_back(dut->o_dval);

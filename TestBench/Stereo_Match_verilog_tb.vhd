@@ -38,18 +38,18 @@ signal si_Tresh_LRCC	:std_logic_vector(log2(D) downto 0) := std_logic_vector(to_
 signal so_dval			:std_logic;				
 signal so_dato			:std_logic_vector(log2(D) downto 0);			
 
-component Stereo_Match is
+component stereo_match is
 	port(
 	i_clk			:in		std_logic;
 	i_rst			:in		std_logic;
-	i_dato_L		:in		std_logic_vector(7 downto 0);
-	i_dato_R		:in		std_logic_vector(7 downto 0);
+	i_data_l		:in		std_logic_vector(7 downto 0);
+	i_data_r		:in		std_logic_vector(7 downto 0);
 	i_dval			:in		std_logic;
-	i_Tresh_LRCC	:in		std_logic_vector(log2(D) downto 0);
+	i_tresh_lrcc	:in		std_logic_vector(log2(D) downto 0);
 	o_dval			:out	std_logic;
-	o_dato			:out	std_logic_vector(log2(D) downto 0)
+	o_data			:out	std_logic_vector(log2(D) downto 0)
 	);
-end component Stereo_Match;
+end component stereo_match;
 
 begin
 
@@ -57,16 +57,16 @@ begin
 --Haga la instancia de su diseño aqui
 
 
-UUT: Stereo_Match
+UUT: stereo_match
 	port map(
 			i_clk		    	=>  si_clk, 
 			i_rst		    	=>  si_rst, 
-			i_dato_L	    	=>  si_dato_L, 
-			i_dato_R	    	=>  si_dato_R, 
+			i_data_l	    	=>  si_dato_L, 
+			i_data_r	    	=>  si_dato_R, 
 			i_dval		    	=>  si_dval, 
-			i_Tresh_LRCC    	=>  si_Tresh_LRCC, 
+			i_tresh_lrcc    	=>  si_Tresh_LRCC, 
 			o_dval		    	=>  so_dval, 
-			o_dato		    	=>  so_dato);
+			o_data		    	=>  so_dato);
 
 --Generacion de la señal de reloj			
 	process

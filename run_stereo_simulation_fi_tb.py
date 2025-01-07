@@ -20,6 +20,7 @@ parser.add_argument('-im','--image', default='Tsukuba', type=str, help='image: [
 parser.add_argument('-ft','--f-type', default=0, type=int, help='image: [Tsukuba, Cones, Teddy]')
 parser.add_argument('-cm','--component', default=0, type=int, help='image: [Tsukuba, Cones, Teddy]')
 parser.add_argument('-bp','--bit-pos', default=0, type=int, help='image: [Tsukuba, Cones, Teddy]')
+parser.add_argument('-src','--source', default='v', type=str, help='source code: [v, vhdl]')
 
 
 
@@ -106,7 +107,7 @@ def main():
     fault_list()
 
     os.chdir(os.path.join(os.getcwd(),"fi_work"))        
-    command = f"./obj_dir/VStereo_Match"
+    command = f"./obj_dir/Vstereo_match"
     print(command)
     os.system(command)
     os.chdir("..")

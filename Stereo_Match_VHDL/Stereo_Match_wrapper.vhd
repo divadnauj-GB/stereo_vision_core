@@ -39,7 +39,7 @@ begin
 --Haga la instancia de su diseño aqui
 
 
-UUT: entity work.Stereo_Match
+UUT: entity work.stereo_match
 	generic map(
 				D		=> D,
 				Wc		=> Wc,	-- Tamaño de la ventana de Census_Transform
@@ -49,13 +49,13 @@ UUT: entity work.Stereo_Match
 				)
 	port map(
 			i_clk		    	=>  i_clk, 
-			i_rst		    	=>  i_rst, 
-			i_dato_L	    	=>  i_dato_L, 
-			i_dato_R	    	=>  i_dato_R, 
+			i_rstn		    	=>  i_rst, 
+			i_data_l	    	=>  i_dato_L, 
+			i_data_r	    	=>  i_dato_R, 
 			i_dval		    	=>  i_dval, 
-			i_Tresh_LRCC    	=>  i_Tresh_LRCC, 
+			i_thresh_lrcc    	=>  i_Tresh_LRCC, 
 			o_dval		    	=>  o_dval, 
-			o_dato		    	=>  o_dato);
+			o_data		    	=>  o_dato);
 
 
 end rtl;

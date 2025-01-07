@@ -5,7 +5,7 @@ quit -sim
 exec vlib work
 #exec vmap gpgpu work
 
-vlog -64 -work work "$Core_Generic_root/Stereo_Match.v"
+vlog -64 -work work "$Core_Generic_root/stereo_match.v"
 
 vcom -64 -2008 -work work "$Core_Generic_root/Stereo_Match_VHDL/SHD/funciones_pkg.vhd"
 vcom -64 -2008 -work work "$Core_Generic_root/TestBench/Stereo_Match_verilog_tb.vhd"

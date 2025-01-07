@@ -45,7 +45,7 @@ begin
 --Haga la instancia de su diseño aqui
 
 
-UUT: entity work.Stereo_Match
+UUT: entity work.stereo_match
 	generic map(
 				D		=> D,
 				Wc		=> Wc,	-- Tamaño de la ventana de Census_Transform
@@ -55,13 +55,13 @@ UUT: entity work.Stereo_Match
 				)
 	port map(
 			i_clk		    	=>  si_clk, 
-			i_rst		    	=>  si_rst, 
-			i_dato_L	    	=>  si_dato_L, 
-			i_dato_R	    	=>  si_dato_R, 
+			i_rstn		    	=>  si_rst, 
+			i_data_l	    	=>  si_dato_L, 
+			i_data_r	    	=>  si_dato_R, 
 			i_dval		    	=>  si_dval, 
-			i_Tresh_LRCC    	=>  si_Tresh_LRCC, 
+			i_thresh_lrcc    	=>  si_Tresh_LRCC, 
 			o_dval		    	=>  so_dval, 
-			o_dato		    	=>  so_dato);
+			o_data		    	=>  so_dato);
 
 --Generacion de la señal de reloj			
 	process
