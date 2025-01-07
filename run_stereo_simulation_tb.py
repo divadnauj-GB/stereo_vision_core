@@ -111,12 +111,14 @@ def main():
         print(command)
         os.system(command)
     else:
-        if args.source=='vhdl':
-            os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_ghdl.sh ")  
-        else:
-            os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_verilog.sh ")
         os.chdir(os.path.join(os.getcwd(),"TestBench"))
-        os.system(f"verilator -max-num-width 80000 --trace --trace-depth 1 -Wno-UNOPTFLAT --threads {args.num_threads} --cc ../stereo_match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f Vstereo_match.mk Vstereo_match")
+        if args.generate_verilog:
+            if args.source=='vhdl':
+                os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_ghdl.sh ")  
+                os.system(f"verilator -O3 -max-num-width 80000 --trace --trace-depth 1 --threads {args.num_threads} --cc ../stereo_match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f Vstereo_match.mk Vstereo_match")
+            else:
+                os.system(f"verilator -O3 --top-module stereo_match -GD={D} -GWC={Wc} -GWH={Wh} -GM={M} -GN={N} --trace --trace-depth 1 --threads {args.num_threads} -j 8 --cc ../stereo_match_verilog/census/census_transform.v ../stereo_match_verilog/disp_cmp/disp_cmp.v ../stereo_match_verilog/lrcc/lrcc.v ../stereo_match_verilog/num_ones/num_ones.v ../stereo_match_verilog/window_SHD/window_SHD.v ../stereo_match_verilog/similarity_module/similarity_module.v ../stereo_match_verilog/stereo_match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f Vstereo_match.mk Vstereo_match")
+        
         command = f"./obj_dir/Vstereo_match"
         print(command)
         os.system(command)
