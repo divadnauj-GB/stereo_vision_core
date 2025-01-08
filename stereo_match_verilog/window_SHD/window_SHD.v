@@ -79,18 +79,18 @@ module window_SHD #(
 
   always @(posedge i_clk, negedge i_rstn) begin
     if (!i_rstn) begin
-      for (i = 0; i < M; i++) begin
+      for (i = 0; i < M; i=i+1) begin
         s_col_line[i] <= 0;
       end
-      for (j = 0; j < M; j++) begin
+      for (j = 0; j < M; j=j+1) begin
         s_row_win[j] <= 0;
       end
     end else if (i_dval) begin
-      for (i = 0; i < M; i++) begin
+      for (i = 0; i < M; i=i+1) begin
         if (i == 0) s_col_line[i] <= s_tmp_add_1;
         else s_col_line[i] <= s_col_line[i-1];
       end
-      for (j = 0; j < WH; j++) begin
+      for (j = 0; j < WH; j=j+1) begin
         if (j == 0) s_row_win[j] <= s_tab_2;
         else s_row_win[j] <= s_row_win[j-1];
       end

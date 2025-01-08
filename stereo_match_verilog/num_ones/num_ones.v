@@ -14,7 +14,7 @@ module num_ones #(
   localparam integer NSTAGES = $clog2(NIBIT);
   localparam integer NOPS = 2 ** NSTAGES;
   localparam integer NOBIT = NSTAGES;
-  localparam integer total_lat = NSTAGES;
+  localparam integer total_lat = NSTAGES+1;
 
 
   input i_clk;
