@@ -121,7 +121,7 @@ module lrcc #(
       counter <= 0;
       o_dval  <= 1'b0;
     end else if (i_dval) begin
-      if (counter < 4) begin
+      if (counter < 5) begin
         counter <= counter + 1;
         o_dval  <= 1'b0;
       end else o_dval <= 1'b1;

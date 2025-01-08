@@ -22,11 +22,11 @@ int main(int argc, char** argv, char** env) {
     std::vector<int> output_valid;
     std::vector<int> fault_descriptor;
 
-    std::ifstream file_image_left("../input_vector_left_image.txt"); 
-    std::ifstream file_image_right("../input_vector_right_image.txt"); 
-    std::ifstream file_image_valid("../input_vector_valid.txt"); 
-    std::ofstream outputDato("../output_vector_data.txt"); // create a new output file or overwrite an existing one
-    std::ofstream outputValid("../output_vector_valid.txt");
+    std::ifstream file_image_left("input_vector_left_image.txt"); 
+    std::ifstream file_image_right("input_vector_right_image.txt"); 
+    std::ifstream file_image_valid("input_vector_valid.txt"); 
+    std::ofstream outputDato("output_vector_data.txt"); // create a new output file or overwrite an existing one
+    std::ofstream outputValid("output_vector_valid.txt");
     std::ifstream file_fault_descriptor("fault_descriptor.txt");
 
     std::string line;

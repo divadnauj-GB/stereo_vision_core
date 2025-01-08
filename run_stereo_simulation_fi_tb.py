@@ -39,7 +39,7 @@ def fault_list():
     component=fi_structure['component']
     bit=fi_structure['bit_pos']
     f_cntrl=fi_structure['f_model']
-    with(open("./fi_work/fault_descriptor.txt","w")) as file:
+    with(open("fault_descriptor.txt","w")) as file:
         file.write(f"{modules}\n")
         file.write(f"{component}\n")
         file.write(f"{sr_leght}\n")
@@ -95,8 +95,6 @@ def main():
 
     # This function serializes the images to make them compatible with the accelerator processing architecture
 
-    Image_input_test.serialize_stereo_images(Left_image=Left_image,Right_image=Right_image,M=M)
-
     f_type=args.f_type
     component=args.component
     bit_pos=args.bit_pos
@@ -104,13 +102,15 @@ def main():
     fi_structure['component']=component
     fi_structure['f_model']=f_type
     fi_structure['bit_pos']=bit_pos
+    
+    os.system(f"mkdir -p tmp{image}{f_type}_{component}_{bit_pos}")
+    os.chdir(os.path.join(os.getcwd(),f"tmp{image}{f_type}_{component}_{bit_pos}"))  
+    
     fault_list()
-
-    os.chdir(os.path.join(os.getcwd(),"fi_work"))        
-    command = f"./obj_dir/Vstereo_match"
+    Image_input_test.serialize_stereo_images(Left_image=Left_image,Right_image=Right_image,M=M)        
+    command = f"../fi_work/obj_dir/Vstereo_match"
     print(command)
     os.system(command)
-    os.chdir("..")
     #os.chdir("..")
 
     # This function takes the output results of the simulation and create the disparity map result as image
@@ -121,6 +121,7 @@ def main():
     File_path=os.getcwd()
     print(File_path)
     os.system("rm *.txt")
+    os.chdir("..")
 
 
 if __name__=='__main__':
