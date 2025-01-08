@@ -38,10 +38,10 @@ module window_SHD #(
   reg signed [NIBIT:0] s_input_col;
   reg signed [NIBIT:0] s_input_col_w;
   reg signed [NIBIT:0] s_tab_1;
-  reg [NOBIT-1:0] s_tab_2;
-  reg [NOBIT-1:0] s_tab_3;
-  reg [NOBIT-1:0] s_tab_4;
-  wire [NOBIT-1:0] s_tmp_add_1;
+  reg signed [NOBIT-1:0] s_tab_2;
+  reg signed [NOBIT-1:0] s_tab_3;
+  reg signed [NOBIT-1:0] s_tab_4;
+  wire signed [NOBIT-1:0] s_tmp_add_1;
 
 
   always @(posedge i_clk, negedge i_rstn) begin
@@ -52,13 +52,13 @@ module window_SHD #(
     end else if (i_dval) begin
       s_input_col <= {1'b0, i_data_l};
       s_input_col_w <= {1'b0, i_data_h};
-      s_tab_1 <= s_input_col - s_input_col_w;
+      s_tab_1 <= $signed(s_input_col) - $signed(s_input_col_w);
     end
   end
 
   //s_tmp_add_1	<=	to_integer(unsigned(s_col_line(M-1)))+to_integer(to_signed(s_tab_1,log2(Wh*(Wc**2)/2)+1));
 
-  assign s_tmp_add_1 = s_col_line[M-1] + {{(NOBIT - NIBIT - 1) {s_tab_1[NIBIT]}}, s_tab_1};
+  assign s_tmp_add_1 = $signed(s_col_line[M-1]) + $signed({{(NOBIT - NIBIT - 1) {s_tab_1[NIBIT]}}, s_tab_1});
 
   always @(posedge i_clk, negedge i_rstn) begin
     if (!i_rstn) s_tab_2 <= 0;
@@ -68,12 +68,12 @@ module window_SHD #(
 
   always @(posedge i_clk, negedge i_rstn) begin
     if (!i_rstn) s_tab_3 <= 0;
-    else if (i_dval) s_tab_3 <= s_tab_2 - s_row_win[WH-1];
+    else if (i_dval) s_tab_3 <= $signed(s_tab_2) - $signed(s_row_win[WH-1]);
   end
 
   always @(posedge i_clk, negedge i_rstn) begin
     if (!i_rstn) s_tab_4 <= 0;
-    else if (i_dval) s_tab_4 <= s_tab_3 + s_tab_4;
+    else if (i_dval) s_tab_4 <= $signed(s_tab_3) + $signed(s_tab_4);
   end
 
 

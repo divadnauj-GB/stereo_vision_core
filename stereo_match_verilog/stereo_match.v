@@ -222,8 +222,7 @@ module stereo_match #(
       s_valid_In <= {2 * D{1'b0}};
       s_global_valid <= 0;
     end else if (s_val_census) begin
-      s_valid_In[0] <= 1'b1;
-      s_valid_In[2*D-1:1] <= s_valid_In[2*D-2:0];
+      s_valid_In <= {s_valid_In[2*D-2:0], 1'b1};
       s_global_valid <= 1;
     end else begin
       s_global_valid <= 0;
