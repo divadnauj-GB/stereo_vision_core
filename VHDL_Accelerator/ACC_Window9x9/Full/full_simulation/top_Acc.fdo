@@ -1,0 +1,16 @@
+vlib work
+
+
+vcom -explicit  -93 -work work "funciones.vhd"
+vcom -explicit  -93 -work work "1_Census_Transform.vhd"
+vcom -explicit  -93 -work work "2_1_Num_of_Ones.vhd"
+vcom -explicit  -93 -work work "2_2_Window_sum.vhd"
+vcom -explicit  -93 -work work "2_3_Disp_Cmp.vhd"
+vcom -explicit  -93 -work work "2_0_SHD.vhd"
+vcom -explicit  -93 -work work "3_0_LLRC.vhd"
+vcom -explicit  -93 -work work "3_Stereo_Match.vhd"
+vcom -explicit  -93 -work work "tb_top.vhd"
+
+vsim -t 1ns -novopt -lib work Stereo_Match_tb
+
+

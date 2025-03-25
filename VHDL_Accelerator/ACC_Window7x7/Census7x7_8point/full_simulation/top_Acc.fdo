@@ -1,0 +1,57 @@
+vlib work
+
+
+vcom -explicit  -93 -work work "funciones.vhd"
+vcom -explicit  -93 -work work "1_Census_Transform.vhd"
+vcom -explicit  -93 -work work "2_1_Num_of_Ones.vhd"
+vcom -explicit  -93 -work work "2_2_Window_sum.vhd"
+vcom -explicit  -93 -work work "2_3_Disp_Cmp.vhd"
+vcom -explicit  -93 -work work "2_0_SHD.vhd"
+vcom -explicit  -93 -work work "3_0_LLRC.vhd"
+vcom -explicit  -93 -work work "3_Stereo_Match.vhd"
+vcom -explicit  -93 -work work "tb_top.vhd"
+
+vsim -t 1ns -novopt -lib work Stereo_Match_tb
+
+# top
+add wave /stereo_match_tb/UUT/i_clk
+add wave /stereo_match_tb/UUT/i_rst
+add wave /stereo_match_tb/UUT/i_dato_L
+add wave /stereo_match_tb/UUT/i_dato_R
+add wave /stereo_match_tb/UUT/i_dval
+add wave /stereo_match_tb/UUT/i_Tresh_LRCC
+add wave /stereo_match_tb/UUT/o_dval
+add wave /stereo_match_tb/UUT/o_dato
+# census
+add wave /stereo_match_tb/UUT/Census_Left/i_data 
+add wave /stereo_match_tb/UUT/Census_Left/i_dval 
+add wave /stereo_match_tb/UUT/Census_Left/o_dval 
+add wave /stereo_match_tb/UUT/Census_Left/o_data_L
+add wave /stereo_match_tb/UUT/Census_Left/o_data_H
+# num of ones
+add wave /stereo_match_tb/UUT/SHD/s_valid_L 
+add wave /stereo_match_tb/UUT/SHD/s_valid_In 
+add wave /stereo_match_tb/UUT/SHD/s_hamming_L 
+add wave /stereo_match_tb/UUT/SHD/s_phamming_L
+# window sum
+add wave /stereo_match_tb/UUT/SHD/s_valid_L 
+add wave /stereo_match_tb/UUT/SHD/s_valid_W 
+add wave /stereo_match_tb/UUT/SHD/s_phamming_L 
+add wave /stereo_match_tb/UUT/SHD/s_phamming_H 
+add wave /stereo_match_tb/UUT/SHD/s_sum_W
+# shd
+add wave /stereo_match_tb/UUT/SHD/i_data_LL \
+add wave /stereo_match_tb/UUT/SHD/i_data_LH \
+add wave /stereo_match_tb/UUT/SHD/i_data_RL \
+add wave /stereo_match_tb/UUT/SHD/i_data_RH \
+add wave /stereo_match_tb/UUT/SHD/i_dval \
+add wave /stereo_match_tb/UUT/SHD/o_dval \
+add wave /stereo_match_tb/UUT/SHD/o_data_L \
+add wave /stereo_match_tb/UUT/SHD/o_data_R
+
+view wave 
+view structure
+view signals
+do wave.do
+run -all
+

@@ -1,0 +1,147 @@
+m255
+K4
+z2
+13
+cModel Technology
+Z0 dD:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp
+!s112 0.1
+!i10d 8192
+!i10e 25
+!i10f 100
+T_opt
+!s110 1710415780
+VMS2h>dV>P7F9P0NUIAV4k3
+04 17 11 work tb_disp_cmp_14bit tb_14bitcmp 1
+=2-a81e84baafd7-65f2dfa4-f3-3640
+o-quiet -auto_acc_if_foreign -work work +acc
+n@_opt
+OL;O;10.2c;57
+Edisp_cmp
+Z1 w1710415771
+Z2 DPx4 work 9 funciones 0 22 K8XmK[:F8gn>4;oejX8ez0
+Z3 DPx4 ieee 11 numeric_std 0 22 WES[o8HS0jHV[MIXQk2Ha1
+Z4 DPx3 std 6 textio 0 22 Y8d?=bLj9m4jiPLbo;>GT0
+Z5 DPx4 ieee 14 std_logic_1164 0 22 1bm?@Gd;P>[>_lN8Do9gP3
+Z6 dD:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp
+Z7 8D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/2_3_Disp_Cmp.vhd
+Z8 FD:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/2_3_Disp_Cmp.vhd
+l0
+L6
+VzQ;h[Y4>_z?Y=dR]>T<nc0
+Z9 OL;C;10.2c;57
+32
+Z10 !s110 1710415776
+Z11 !s108 1710415776.790000
+Z12 !s90 -reportprogress|300|-work|work|D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/2_3_Disp_Cmp.vhd|
+Z13 !s107 D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/2_3_Disp_Cmp.vhd|
+Z14 o-work work
+Z15 tExplicit 1
+!s100 aXIK@Lba=9[e;6:HMY54:3
+!i10b 1
+!i111 0
+Artl
+R2
+R3
+R4
+R5
+DEx4 work 8 disp_cmp 0 22 zQ;h[Y4>_z?Y=dR]>T<nc0
+l26
+L23
+V[034n<G9@9TdP8bbEiK_F3
+R9
+32
+R10
+R11
+R12
+R13
+R14
+R15
+!s100 0imYPXS=cNAa?kHme=N>:2
+!i10b 1
+!i111 0
+Pfunciones
+R3
+R4
+R5
+Z16 w1708618013
+R6
+Z17 8D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/funciones.vhd
+Z18 FD:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/funciones.vhd
+l0
+L7
+VK8XmK[:F8gn>4;oejX8ez0
+R9
+32
+b1
+Z19 !s110 1710415631
+Z20 !s108 1710415631.750000
+Z21 !s90 -reportprogress|300|-work|work|D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/funciones.vhd|
+Z22 !s107 D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/funciones.vhd|
+R14
+R15
+!s100 RgmMhY]J?S5JSM[;6@nm]0
+!i10b 1
+!i111 0
+Bbody
+R2
+R3
+R4
+R5
+l0
+L13
+VVON802T>>Fil]KM0OzY<i1
+R9
+32
+R19
+R20
+R21
+R22
+R14
+R15
+nbody
+!s100 CH=EaO8F[z^4WW2zEE8WX3
+!i10b 1
+!i111 0
+Etb_disp_cmp_14bit
+Z23 w1710415648
+R2
+R3
+R4
+R5
+R6
+Z24 8D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/tb_cmp_fullWindow.vhd
+Z25 FD:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/tb_cmp_fullWindow.vhd
+l0
+L7
+V_E^YnFdCTBBj<eHiF=cb;0
+R9
+32
+Z26 !s110 1710415654
+Z27 !s108 1710415654.070000
+Z28 !s90 -reportprogress|300|-work|work|D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/tb_cmp_fullWindow.vhd|
+Z29 !s107 D:/MASTER/Thesis/VHDL_Accelerator/Census7x7Full/others/Disp_Cmp/tb_cmp_fullWindow.vhd|
+R14
+R15
+!s100 nPSI[MP`H>H8294hZkIZj3
+!i10b 1
+!i111 0
+Atb_14bitcmp
+R2
+R3
+R4
+R5
+DEx4 work 17 tb_disp_cmp_14bit 0 22 _E^YnFdCTBBj<eHiF=cb;0
+l36
+L10
+VcH_3LP574:kUjWo^N4:^d2
+R9
+32
+R26
+R27
+R28
+R29
+R14
+R15
+!s100 S<zY>[0PV;PD`F>H^U9e:2
+!i10b 1
+!i111 0
