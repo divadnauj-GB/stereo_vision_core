@@ -1,0 +1,1 @@
+The script_injection.py automatically insert the saboteur in a design. A netlist of the design must be provided. There are 2 options: SEU and saboteur injection.
