@@ -1,1 +1,0 @@
--64 -voptargs=+acc -gD=48 -gM=384 work.stereo_match_tb
