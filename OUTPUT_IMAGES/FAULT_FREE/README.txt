@@ -1,0 +1,1 @@
+These are golden output images. They are grouped according to window sizes. There are also histograms of images with respect to threshold. The threshold is used for the accuracy metric.

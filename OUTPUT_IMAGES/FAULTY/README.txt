@@ -1,0 +1,1 @@
+These are fauulty images. The stuck-at-faults are injected into the comparators' outputs. The statistics are in the all_statistics file.
