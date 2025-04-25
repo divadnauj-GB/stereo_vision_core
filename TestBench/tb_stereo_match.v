@@ -62,11 +62,11 @@ end
 
 
 initial begin
-    fd_il = $fopen("../input_vector_left_image.txt","r");
-    fd_ir = $fopen("../input_vector_right_image.txt","r");
-    fd_iv = $fopen("../input_vector_valid.txt","r");
-    fd_od = $fopen("../output_vector_data.txt","w");
-    fd_ov = $fopen("../output_vector_valid.txt","w");
+    fd_il = $fopen("./input_vector_left_image.txt","r");
+    fd_ir = $fopen("./input_vector_right_image.txt","r");
+    fd_iv = $fopen("./input_vector_valid.txt","r");
+    fd_od = $fopen("./output_vector_data.txt","w");
+    fd_ov = $fopen("./output_vector_valid.txt","w");
     i_clk = 0;
     i_rstn = 0;
     i_data_l = 0;
