@@ -23,6 +23,7 @@ parser.add_argument('-nt','--num-threads', default=4, type=int, help='num of thr
 parser.add_argument('-src','--source', default='v', type=str, help='source code: [v, vhdl]')
 
 
+
 def main():
     # this are the configuration parameters of the accelerator passed trought the TB
     args=parser.parse_args()
@@ -58,7 +59,7 @@ def main():
         
     print(im_shape)
 
-
+    work_dir = "./TestBench/obj_dir"
     command = "rm -R ./work"
     print(command)
     os.system(command)
@@ -74,24 +75,24 @@ def main():
             os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_ghdl.sh ")  
         else:
             os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_verilog.sh ")
-    #os.chdir(os.path.join(os.getcwd(),"TestBench"))
+    ## os.chdir(os.path.join(os.getcwd(),"TestBench"))
     # this command launch the simulation in modelsim
 
     if args.simulation_tool=='verilator':
-        os.chdir(os.path.join(os.getcwd(),"TestBench"))
+        # os.chdir(os.path.join(os.getcwd(),"TestBench"))
         if args.generate_verilog:
-            os.system(f"verilator -O3 -max-num-width 80000 --trace --trace-depth 1 --threads {args.num_threads} -j 8 --cc ../stereo_match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f Vstereo_match.mk Vstereo_match")
-        command = f"./obj_dir/Vstereo_match"
+            os.system(f"verilator -O3 -max-num-width 80000 --trace --trace-depth 1 --threads {args.num_threads} -j 8 --cc ../stereo_match.v --exe Stereo_Match_tb.cpp --Mdir {work_dir}; make -C {work_dir} -f Vstereo_match.mk Vstereo_match")
+        command = f"{work_dir}/Vstereo_match"
         print(command)
         os.system(command)
-        os.chdir("..")
+        # os.chdir("..")
     elif args.simulation_tool=='cocotb+verilator':
-        os.chdir(os.path.join(os.getcwd(),"TestBench"))
+        # os.chdir(os.path.join(os.getcwd(),"TestBench"))
         # this command launch the simulation in modelsim
         command = "make"
         print(command)
         os.system(command)
-        os.chdir("..")
+        # os.chdir("..")
     elif args.simulation_tool=='qsim+verilog':
         # Here I create the configuration file that resize the accelerator according to the width of the input image
         with open("vsim_config.txt","w") as vsim_config:
@@ -112,32 +113,34 @@ def main():
     elif args.simulation_tool=='verilator+timing':
         if args.generate_verilog:
             #os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash scripts/yosys_verilog.sh ")
-            os.chdir(os.path.join(os.getcwd(),"TestBench"))
+            # os.chdir(os.path.join(os.getcwd(),"TestBench"))
             os.system("rm -rf obj_dir")
-            os.system(f"verilator -O3 --timing --top-module tb_stereo_match -GD={D} -GWC={Wc} -GWH={Wh} -GM={M} -GN={N} --trace --trace-depth 1 --threads {args.num_threads} -j 8 --binary ../stereo_match.v tb_stereo_match.v; make -C obj_dir -f Vtb_stereo_match.mk Vtb_stereo_match")
+            os.system(f"verilator -O3 --timing --top-module tb_stereo_match -GD={D} -GWC={Wc} -GWH={Wh} -GM={M} -GN={N} --trace --trace-depth 1 --threads {args.num_threads} -j 8 --binary ../stereo_match.v tb_stereo_match.v --Mdir {work_dir}; make -C {work_dir} -f Vtb_stereo_match.mk Vtb_stereo_match")
         else:
-             os.chdir(os.path.join(os.getcwd(),"TestBench"))
-        command = f"./obj_dir/Vtb_stereo_match"
+             # os.chdir(os.path.join(os.getcwd(),"TestBench"))
+             ...
+        command = f"{work_dir}/Vtb_stereo_match"
         print(command)
         os.system(command)
-        os.chdir("..")
+        # os.chdir("..")
     else:
         if args.generate_verilog:
             if args.source=='vhdl':
                 os.system(f"export Wc={Wc} Wh={Wh} D={D} M={M}; bash ./scripts/yosys_ghdl.sh ") 
-                os.chdir(os.path.join(os.getcwd(),"TestBench")) 
-                os.system(f"verilator -O3 -max-num-width 80000 --trace --trace-depth 1 --threads {args.num_threads} --cc ../stereo_match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f Vstereo_match.mk Vstereo_match")
+                # os.chdir(os.path.join(os.getcwd(),"TestBench")) 
+                os.system(f"verilator -O3 -max-num-width 80000 --trace --trace-depth 1 --threads {args.num_threads} --cc ../stereo_match.v --exe Stereo_Match_tb.cpp --Mdir {work_dir}; make -C {work_dir} -f Vstereo_match.mk Vstereo_match")
             else:
-                os.chdir(os.path.join(os.getcwd(),"TestBench"))
+                # os.chdir(os.path.join(os.getcwd(),"TestBench"))
                 # os.system(f"verilator --top-module stereo_match -GD={D} -GWC={Wc} -GWH={Wh} -GM={M} -GN={N} --trace --trace-depth 1 --threads {args.num_threads} -j 8 --cc ../stereo_match_verilog/census/census_transform.v ../stereo_match_verilog/disp_cmp/disp_cmp.v ../stereo_match_verilog/lrcc/lrcc.v ../stereo_match_verilog/num_ones/num_ones.v ../stereo_match_verilog/window_SHD/window_SHD.v ../stereo_match_verilog/similarity_module/similarity_module.v ../stereo_match_verilog/stereo_match.v --exe Stereo_Match_tb.cpp; make -C obj_dir -f Vstereo_match.mk Vstereo_match")
-                os.system(f"verilator --top-module tb_stereo_match -GD={D} -GWC={Wc} -GWH={Wh} -GM={M} -GN={N} --trace --trace-depth 1 --threads {args.num_threads} -j 8 --binary ../stereo_match_verilog/census/census_transform.v ../stereo_match_verilog/disp_cmp/disp_cmp.v ../stereo_match_verilog/lrcc/lrcc.v ../stereo_match_verilog/num_ones/num_ones.v ../stereo_match_verilog/window_SHD/window_SHD.v ../stereo_match_verilog/similarity_module/similarity_module.v ../stereo_match_verilog/stereo_match.v tb_stereo_match.v")
+                os.system(f"verilator --top-module tb_stereo_match -GD={D} -GWC={Wc} -GWH={Wh} -GM={M} -GN={N} --trace --trace-depth 1 --threads {args.num_threads} -j 8 --binary ../stereo_match_verilog/census/census_transform.v ../stereo_match_verilog/disp_cmp/disp_cmp.v ../stereo_match_verilog/lrcc/lrcc.v ../stereo_match_verilog/num_ones/num_ones.v ../stereo_match_verilog/window_SHD/window_SHD.v ../stereo_match_verilog/similarity_module/similarity_module.v ../stereo_match_verilog/stereo_match.v tb_stereo_match.v --Mdir {work_dir}")
         else:
-            os.chdir(os.path.join(os.getcwd(),"TestBench"))
-        command = f"./obj_dir/Vtb_stereo_match"
+            # os.chdir(os.path.join(os.getcwd(),"TestBench"))
+            ...
+        command = f"{work_dir}/Vtb_stereo_match"
         print(command)
         os.system(command)
-        os.chdir("..")
-    #os.chdir("..")
+        # os.chdir("..")
+    ## os.chdir("..")
 
     # This function takes the output results of the simulation and create the disparity map result as image
     im=Image_result_test.create_disparity_map(N_filas,M,3,Thresh)
@@ -145,7 +148,7 @@ def main():
     # removing parameters from previous configurations:
     File_path=os.getcwd()
     print(File_path)
-    os.system("rm *.txt")
+    #os.system("rm *.txt")
 
 
 if __name__=='__main__':
